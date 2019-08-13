@@ -1,0 +1,200 @@
+﻿appID:wxf878bb2864a8f765(大树online)(1942194789@qq.com)
+
+appAK:FbQnfGzGi0nBVgaNZj0gVgIqKoKlPcXh(微信登陆)
+https://api.map.baidu.com
+https://m.maoyan.com
+
+POI:Point of Interest-兴趣点
+
+app()
+onLaunch();
+onShow();
+onHide();
+自定义函数:
+全局变量(数据):
+
+setData给数组或者对象赋值
+     // 拼接：把数组或者对象的赋值字符
+    // 用[]包裹起来
+    // 开始赋值
+    let tmp = 'navFood[' + nav + '].product[' + sn + '].num';
+    this.setData({
+      [tmp]: num
+    })
+
+1.在app.js中的globalData定义全局变量:host:"www.qq.com";
+2.在非app.js页面js中获取app实例const app = getApp();
+3.get获取app中定义的全局变量app.globalData.host;
+4.也子页面中也可以set设置app中定义的全局变量
+注意:在app.js页面中直接用this获取
+
+//马上执行
+1.存:wx.setStorageSync("title", title);
+2.取:wx.getStorageSync("title");
+以Sync（同步，同时）结尾的都是都是同步缓存，二者的区别是，异步不会阻塞当前任务，同步缓存直到同步方法处理完才能继续往下执行。
+但是一般情况下不要用清除所有的缓存，如果想要清除相应的缓存，设置对应的缓存内容为空数组就好
+
+
+align-self:单独设置某个子元素的对齐
+
+
+
+自定义函数使用的时候一定要根据函数定义的位置写上this或者其他路由.不能简单的直接使用函数.
+
+组件---------------------------------------------------------------------------
+
+给组件增加一个属性,一定要以data-xxx开始
+
+view=div
+
+text=span,但是text 会记录你的格式,比如空格,回车等特殊字符
+
+button
+type:default/primary/warn;//分别是白色/绿色/红色
+plain:false/true;//是否镂空或者说边框模式
+loading:false/true;//是否带有加载的图表样式
+open-type:contact/share;//进入客服对话模式/分享页面
+//普通的按钮,建议使用view来实现.系统的按钮太丑了
+
+input
+样式的话一般需要外面包裹个view自己定义
+
+switch
+<switch color="#f40" type="switch" checked="true" bindchange="listenerSwitch" />
+注意:
+1.颜色直接写在wxml.不能在css里指定...
+2.type:switch和checkbox二种
+
+swiper
+<swiper class="swiper-wrap" indicator-dots="true" autoplay="true" circular="true" interval="3000" duration="500" indicator-color="rgba(255,255,255,0.4)" indicator-active-color="rgba(255,255,255,1)" current='{{currentPic}}'>
+  <block wx:for="{{imgUrls}}" wx:key="this">
+    <swiper-item id="{{index}}" bindtap='swiperTap'>
+      <image src="{{item}}" class="image" mode="widthFix" />
+    </swiper-item>
+  </block>
+</swiper>
+注意
+1.swiper的类样式一般指定上下边距,大小等基本样式
+2.指定了current是方便点击某个视图时获取当前的视图
+3.在swiper-item上直接指定id属性即可.id是组件本身就有的.组件本身也提供了一个item-id.虽然在wxml中可以体现出来.但是事件中没有体现.我们无法利用这个属性定位某个视图.
+
+scroll-view
+只能使用内联样式,不能在wxss中指定样式(?)
+scroll-into-view:指定一开始就滚动到哪个id元素位置处
+scroll-top:要配合scroll-y使用,指定垂直方向上滚动条的位置(scroll-left配合scroll-y)
+注意:
+1.组件父级元素,也就是包裹组件的元素,要设置:overflow: hidden;  white-space: nowrap;
+2.组件本身,不管水平滑还是垂直滑,必须要显示设置高度.不要指望继承父级的高度
+3.组件子级元素,也就是组件内部的元素要设置:display: inline-block(限水平方向);
+4.scroll-into-view的优先级比scroll-top高.如果指定了前者,则后者无效
+5.小程序scroll-view中的bindscrolltolower方法失效的原因是，需要在app.wxss中设置
+page{    height：100%},并且在有scroll-view的view中设置height：100%
+
+navigator 
+<navigator url="">跳转到新页面</navigator>
+
+wx.navigateTo({
+  url: ''
+})
+注意:
+1.不可以跳转到已经在tabBar里引用过的页面(主页面)
+2.url可以是相对/绝对路径，且页面不需要使用.wxml后缀
+3.可以把数据以值-对的形式附在rul后面传过去.值-对间以&分隔.有变量的话,可用字符串拼接实现.
+4.在跳转目标页面的js文件中,使用onLoad: function(options) {//..}函数中得到值：options.变量名可以得到传过来的数据
+5.onLoad和其他生命周期函数不一样,只有它是可以接收页面跳转所带来的数据
+
+函数----------------------------------------------------------------------------
+
+number.toFixed(num):四舍五入为指定小数位数的数字.切记是数字!!!字符串使用这个方法会报错
+
+API------------------------------------------------------------------------------
+网络请求，基本上是必须的环节之一,与开发者的服务器实现数据交互的一个很重要的API
+wx.request({ 
+     method:"GET",    //注意请求方式必须大写！！！
+     url:'xxxxxxxxx',  //必须是https协议
+     data:{},  
+     header: {'content-type': 'application/json'},  //content-type必须小写！！！
+     success: (res)=> {  
+       console.log(res)  
+     }  
+   })  
+//显示消息提示框
+wx.showToast({
+  title: '成功',
+  icon: 'success',//success/loading/none;
+  duration: 2000//消息提示框显示/存在的时长.不是多少时间后才显示;
+})
+
+//隐藏消息提示框
+wx.hideToast()
+
+REG
+var qqReg=/^[1-9]\d{4,10}$/;
+var pwReg=/[0-9a-zA-Z]{6,12}/;
+
+//根据数据决定使用哪个样式
+<view class="{{isFold? 'textWrapperClose':'textWrapperOpen' }}">
+  <text class='text'>{{info}}</text>
+</view>
+
+也可以使用if-else
+wx:if
+wx:for
+wx:elif
+wx:else
+最好写在block上..................................
+
+require 暂时不支持绝对路径
+
+template
+1.定义:在a.wxml中定义
+<template name="item">
+  ...
+</template>
+
+2.引入:在要使用template的b.wxml中引入
+<import src="a.wxml"/>
+注意:
+.模板导入时,import只能引入这一级,不可以引入目标文件中引入的文件.
+.样式导入时,用@import,@import后跟需要导入的外联样式表的相对路径,用;表示语句结束.
+
+3.使用:在b.wxml中使用
+<template is="item" data="{{text: 'forbar'}}"/>
+
+
+
+wx.createAnimation
+.wxml
+为组件添加动画属性:animation="{{animationData}}"
+.js
+1.声明动画(一般在page外部)
+var animationIcon = wx.createAnimation({
+  duration: 2000,
+  timingFunction: 'ease',
+  transformOrigin: "0 50% 0"
+})
+2.动画绑定(在page的data部分)
+data: {
+    animationData: {}
+}
+3.定义动画(一般在某个函数里),可链式追加
+    animationIcon.translateY(-120).step().opacity(1).step();
+4.输出动画(数据绑定更新)
+    this.setData({
+      animationData: animationIcon.export()      
+    })
+
+热映影片
+let _this = this;
+wx.request({
+      url: 'https://api.map.baidu.com/telematics/v3/movie?qt=hot_movie&location=北京&output=json&ak=' + app.globalData.ak,
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: (res) => {
+        console.log(res.data.result.movie[0]);
+        _this.setData({
+          movie: res.data.result.movie
+        })
+      }
+    })

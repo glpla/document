@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)https://www.jianshu.com/p/6712e4e4b8fe -->
+<html><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+
+  <!-- Start of Baidu Transcode -->
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta name="applicable-device" content="pc,mobile">
+  <meta name="MobileOptimized" content="width">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="mobile-agent" content="format=html5;url=https://www.jianshu.com/p/6712e4e4b8fe">
+  <!-- End of Baidu Transcode -->
+
+    <meta name="description" content="1、首先npm install webpack webpack-cli webpack-dev-server -g (mac电脑用超级管理员的形式进行安装需要前面加上sudo,Windows 电脑不用加sudo) 2、输入命令mkdir config dist src创建三个文件夹 4、输入命令touch dist/index.html src/index.js分别dist和src文件夹下面...">
+
+  <meta name="360-site-verification" content="604a14b53c6b871206001285921e81d8">
+  <meta property="wb:webmaster" content="294ec9de89e7fadb">
+  <meta property="qc:admins" content="104102651453316562112116375">
+  <meta property="qc:admins" content="11635613706305617">
+  <meta property="qc:admins" content="1163561616621163056375">
+  <meta name="google-site-verification" content="cV4-qkUJZR6gmFeajx_UyPe47GW9vY6cnCrYtCHYNh4">
+  <meta name="google-site-verification" content="HF7lfF8YEGs1qtCE-kPml8Z469e2RHhGajy6JPVy5XI">
+  <meta http-equiv="mobile-agent" content="format=html5; url=https://www.jianshu.com/p/6712e4e4b8fe">
+
+  <!-- Apple -->
+  <meta name="apple-mobile-web-app-title" content="简书">
+
+    <!--  Meta for Smart App Banner -->
+  <meta name="apple-itunes-app" content="app-id=888237539, app-argument=jianshu://notes/26556401">
+  <!-- End -->
+
+  <!--  Meta for Twitter Card -->
+  <meta content="summary" property="twitter:card">
+  <meta content="@jianshucom" property="twitter:site">
+  <meta content="webpack4.x入门配置" property="twitter:title">
+  <meta content="1、首先npm install webpack webpack-cli webpack-dev-server -g (mac电脑用超级管理员的形式进行安装需要前面加上sudo..." property="twitter:description">
+  <meta content="https://www.jianshu.com/p/6712e4e4b8fe" property="twitter:url">
+  <!-- End -->
+
+  <!--  Meta for OpenGraph -->
+  <meta property="fb:app_id" content="865829053512461">
+  <meta property="og:site_name" content="简书">
+  <meta property="og:title" content="webpack4.x入门配置">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.jianshu.com/p/6712e4e4b8fe">
+  <meta property="og:description" content="1、首先npm install webpack webpack-cli webpack-dev-server -g (mac电脑用超级管理员的形式进行安装需要前面加上sudo,Windows 电...">
+  <!-- End -->
+
+  <!--  Meta for Facebook Applinks -->
+  <meta property="al:ios:url" content="jianshu://notes/26556401">
+  <meta property="al:ios:app_store_id" content="888237539">
+  <meta property="al:ios:app_name" content="简书">
+
+  <meta property="al:android:url" content="jianshu://notes/26556401">
+  <meta property="al:android:package" content="com.jianshu.haruki">
+  <meta property="al:android:app_name" content="简书">
+  <!-- End -->
+
+
+    <title>webpack4.x入门配置 - 简书</title>
+
+  <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="Y46CGBvSKblItSdbL8iXxix5r65Hi2LzwNsEe8zJwuEIj0WZahNeHd02rR6zwNzpyepOSC8pnqTwQxyjQhOA4A==">
+
+  <link rel="stylesheet" media="all" href="./webpack4.x入门配置 - 简书_files/web-d5108cec60c4ed55f041.css">
+  
+  <link rel="stylesheet" media="all" href="./webpack4.x入门配置 - 简书_files/entry-f1bfe3a5bcbd20b68049.css">
+
+  <link href="https://cdn2.jianshu.io/assets/favicons/favicon-e743bfb1821442341c3ab15bdbe804f7ad97676bd07a770ccc9483473aa76f06.ico" rel="shortcut icon" type="image/x-icon">
+      <link rel="apple-touch-icon-precomposed" href="https://cdn2.jianshu.io/assets/apple-touch-icons/57-a6f1f1ee62ace44f6dc2f6a08575abd3c3b163288881c78dd8d75247682a4b27.png" sizes="57x57">
+      <link rel="apple-touch-icon-precomposed" href="https://cdn2.jianshu.io/assets/apple-touch-icons/72-fb9834bcfce738fd7b9c5e31363e79443e09a81a8e931170b58bc815387c1562.png" sizes="72x72">
+      <link rel="apple-touch-icon-precomposed" href="https://cdn2.jianshu.io/assets/apple-touch-icons/76-49d88e539ff2489475d603994988d871219141ecaa0b1a7a9a1914f4fe3182d6.png" sizes="76x76">
+      <link rel="apple-touch-icon-precomposed" href="https://cdn2.jianshu.io/assets/apple-touch-icons/114-24252fe693524ed3a9d0905e49bff3cbd0228f25a320aa09053c2ebb4955de97.png" sizes="114x114">
+      <link rel="apple-touch-icon-precomposed" href="https://cdn2.jianshu.io/assets/apple-touch-icons/120-1bb7371f5e87f93ce780a5f1a05ff1b176828ee0d1d130e768575918a2e05834.png" sizes="120x120">
+      <link rel="apple-touch-icon-precomposed" href="https://cdn2.jianshu.io/assets/apple-touch-icons/152-bf209460fc1c17bfd3e2b84c8e758bc11ca3e570fd411c3bbd84149b97453b99.png" sizes="152x152">
+
+  <!-- Start of 访问统计 -->
+    <script src="./webpack4.x入门配置 - 简书_files/push.js.下载"></script><script src="./webpack4.x入门配置 - 简书_files/hm.js.下载"></script><script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0c0e9d9b1e7d617b3e6842e85b9fb068";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+  <!-- End of 访问统计 -->
+<style type="text/css">@charset "UTF-8";.image-package .image-container{position:relative;z-index:2;background-color:#eee;-webkit-transition:background-color .1s linear;-o-transition:background-color .1s linear;transition:background-color .1s linear;margin:0 auto}body.reader-night-mode .image-package .image-container{background-color:#545454}.image-package .image-container-fill{z-index:1}.image-package .image-container .image-view{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden}.image-package .image-container .image-view-error:after{content:"图片获取失败，请点击重试";position:absolute;top:50%;left:50%;width:100%;-webkit-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);transform:translate(-50%,-50%);color:#888;font-size:14px}.image-package .image-container .image-view img.image-loading{opacity:.3}.image-package .image-container .image-view img{-webkit-transition:all .15s linear;-o-transition:all .15s linear;transition:all .15s linear;z-index:2;opacity:1}</style><style type="text/css">fieldset[disabled] .multiselect {
+  pointer-events: none;
+}
+
+.multiselect__spinner {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  width: 48px;
+  height: 35px;
+  background: #fff;
+  display: block;
+}
+
+.multiselect__spinner:after,
+.multiselect__spinner:before {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  margin: -8px 0 0 -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  border-color: #41b883 transparent transparent;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: 0 0 0 1px transparent;
+}
+
+.multiselect__spinner:before {
+  animation: a 2.4s cubic-bezier(.41,.26,.2,.62);
+  animation-iteration-count: infinite;
+}
+
+.multiselect__spinner:after {
+  animation: a 2.4s cubic-bezier(.51,.09,.21,.8);
+  animation-iteration-count: infinite;
+}
+
+.multiselect__loading-enter-active,
+.multiselect__loading-leave-active {
+  transition: opacity .4s ease-in-out;
+  opacity: 1;
+}
+
+.multiselect__loading-enter,
+.multiselect__loading-leave-active {
+  opacity: 0;
+}
+
+.multiselect,
+.multiselect__input,
+.multiselect__single {
+  font-family: inherit;
+  font-size: 14px;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+.multiselect {
+  box-sizing: content-box;
+  display: block;
+  position: relative;
+  width: 100%;
+  min-height: 40px;
+  text-align: left;
+  color: #35495e;
+}
+
+.multiselect * {
+  box-sizing: border-box;
+}
+
+.multiselect:focus {
+  outline: none;
+}
+
+.multiselect--disabled {
+  opacity: .6;
+}
+
+.multiselect--active {
+  z-index: 1;
+}
+
+.multiselect--active:not(.multiselect--above) .multiselect__current,
+.multiselect--active:not(.multiselect--above) .multiselect__input,
+.multiselect--active:not(.multiselect--above) .multiselect__tags {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.multiselect--active .multiselect__select {
+  transform: rotate(180deg);
+}
+
+.multiselect--above.multiselect--active .multiselect__current,
+.multiselect--above.multiselect--active .multiselect__input,
+.multiselect--above.multiselect--active .multiselect__tags {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.multiselect__input,
+.multiselect__single {
+  position: relative;
+  display: inline-block;
+  min-height: 20px;
+  line-height: 20px;
+  border: none;
+  border-radius: 5px;
+  background: #fff;
+  padding: 0 0 0 5px;
+  width: 100%;
+  transition: border .1s ease;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  vertical-align: top;
+}
+
+.multiselect__tag~.multiselect__input,
+.multiselect__tag~.multiselect__single {
+  width: auto;
+}
+
+.multiselect__input:hover,
+.multiselect__single:hover {
+  border-color: #cfcfcf;
+}
+
+.multiselect__input:focus,
+.multiselect__single:focus {
+  border-color: #a8a8a8;
+  outline: none;
+}
+
+.multiselect__single {
+  padding-left: 6px;
+  margin-bottom: 8px;
+}
+
+.multiselect__tags-wrap {
+  display: inline;
+}
+
+.multiselect__tags {
+  min-height: 40px;
+  display: block;
+  padding: 8px 40px 0 8px;
+  border-radius: 5px;
+  border: 1px solid #e8e8e8;
+  background: #fff;
+}
+
+.multiselect__tag {
+  position: relative;
+  display: inline-block;
+  padding: 4px 26px 4px 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+  color: #fff;
+  line-height: 1;
+  background: #41b883;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
+
+.multiselect__tag-icon {
+  cursor: pointer;
+  margin-left: 7px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  font-weight: 700;
+  font-style: normal;
+  width: 22px;
+  text-align: center;
+  line-height: 22px;
+  transition: all .2s ease;
+  border-radius: 5px;
+}
+
+.multiselect__tag-icon:after {
+  content: "\D7";
+  color: #266d4d;
+  font-size: 14px;
+}
+
+.multiselect__tag-icon:focus,
+.multiselect__tag-icon:hover {
+  background: #369a6e;
+}
+
+.multiselect__tag-icon:focus:after,
+.multiselect__tag-icon:hover:after {
+  color: #fff;
+}
+
+.multiselect__current {
+  min-height: 40px;
+  overflow: hidden;
+  padding: 8px 12px 0;
+  padding-right: 30px;
+  white-space: nowrap;
+  border-radius: 5px;
+  border: 1px solid #e8e8e8;
+}
+
+.multiselect__current,
+.multiselect__select {
+  line-height: 16px;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.multiselect__select {
+  position: absolute;
+  width: 40px;
+  height: 38px;
+  right: 1px;
+  top: 1px;
+  padding: 4px 8px;
+  text-align: center;
+  transition: transform .2s ease;
+}
+
+.multiselect__select:before {
+  position: relative;
+  right: 0;
+  top: 65%;
+  color: #999;
+  margin-top: 4px;
+  border-style: solid;
+  border-width: 5px 5px 0;
+  border-color: #999 transparent transparent;
+  content: "";
+}
+
+.multiselect__placeholder {
+  color: #adadad;
+  display: inline-block;
+  margin-bottom: 10px;
+  padding-top: 2px;
+}
+
+.multiselect--active .multiselect__placeholder {
+  display: none;
+}
+
+.multiselect__content-wrapper {
+  position: absolute;
+  display: block;
+  background: #fff;
+  width: 100%;
+  max-height: 240px;
+  overflow: auto;
+  border: 1px solid #e8e8e8;
+  border-top: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+.multiselect__content {
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  min-width: 100%;
+  vertical-align: top;
+}
+
+.multiselect--above .multiselect__content-wrapper {
+  bottom: 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: none;
+  border-top: 1px solid #e8e8e8;
+}
+
+.multiselect__content::webkit-scrollbar {
+  display: none;
+}
+
+.multiselect__element {
+  display: block;
+}
+
+.multiselect__option {
+  display: block;
+  padding: 12px;
+  min-height: 40px;
+  line-height: 16px;
+  text-decoration: none;
+  text-transform: none;
+  vertical-align: middle;
+  position: relative;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.multiselect__option:after {
+  top: 0;
+  right: 0;
+  position: absolute;
+  line-height: 40px;
+  padding-right: 12px;
+  padding-left: 20px;
+}
+
+.multiselect__option--highlight {
+  background: #41b883;
+  outline: none;
+  color: #fff;
+}
+
+.multiselect__option--highlight:after {
+  content: attr(data-select);
+  background: #41b883;
+  color: #fff;
+}
+
+.multiselect__option--selected {
+  background: #f3f3f3;
+  color: #35495e;
+  font-weight: 700;
+}
+
+.multiselect__option--selected:after {
+  content: attr(data-selected);
+  color: silver;
+}
+
+.multiselect__option--selected.multiselect__option--highlight {
+  background: #ff6a6a;
+  color: #fff;
+}
+
+.multiselect__option--selected.multiselect__option--highlight:after {
+  background: #ff6a6a;
+  content: attr(data-deselect);
+  color: #fff;
+}
+
+.multiselect--disabled {
+  background: #ededed;
+  pointer-events: none;
+}
+
+.multiselect--disabled .multiselect__current,
+.multiselect--disabled .multiselect__select,
+.multiselect__option--disabled {
+  background: #ededed;
+  color: #a6a6a6;
+}
+
+.multiselect__option--disabled {
+  cursor: text;
+  pointer-events: none;
+}
+
+.multiselect__option--disabled.multiselect__option--highlight {
+  background: #dedede!important;
+}
+
+.multiselect-enter-active,
+.multiselect-leave-active {
+  transition: all .15s ease;
+}
+
+.multiselect-enter,
+.multiselect-leave-active {
+  opacity: 0;
+}
+
+.multiselect__strong {
+  margin-bottom: 8px;
+  line-height: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+[dir=rtl] .multiselect {
+  text-align: right;
+}
+
+[dir=rtl] .multiselect__select {
+  right: auto;
+  left: 1px;
+}
+
+[dir=rtl] .multiselect__tags {
+  padding: 8px 8px 0 40px;
+}
+
+[dir=rtl] .multiselect__content {
+  text-align: right;
+}
+
+[dir=rtl] .multiselect__option:after {
+  right: auto;
+  left: 0;
+}
+
+[dir=rtl] .multiselect__clear {
+  right: auto;
+  left: 12px;
+}
+
+[dir=rtl] .multiselect__spinner {
+  right: auto;
+  left: 1px;
+}
+
+@keyframes a {
+  0% {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(2turn);
+  }
+}</style><style type="text/css">
+#free-reward-panel .reward-users-modal main {
+  padding: 0;
+}
+</style><style type="text/css">
+@charset "UTF-8";
+/*
+ * 变量
+*/
+.reward-note-modal .v-modal {
+  width: 620px;
+  text-align: center;
+}
+.reward-note-modal .v-modal form {
+    margin: 0 auto 25px auto;
+    padding: 0 40px;
+}
+.reward-note-modal .v-modal .reward-intro {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+.reward-note-modal .v-modal .reward-intro .avatar {
+      cursor: default !important;
+      width: 36px;
+      height: 36px;
+      margin-right: 10px;
+      display: inline-block;
+}
+.reward-note-modal .v-modal .reward-intro .intro {
+      margin-right: 5px;
+      font-weight: bold;
+      vertical-align: middle;
+}
+.reward-note-modal .v-modal .reward-intro i {
+      color: #EA6F5A;
+      vertical-align: middle;
+}
+.reward-note-modal .v-modal .main-inputs {
+    margin: 25px 0;
+}
+.reward-note-modal .v-modal .main-inputs .amount-group {
+      margin: 0 -5px;
+}
+.reward-note-modal .v-modal .main-inputs .amount-group input {
+        display: none;
+}
+.reward-note-modal .v-modal .main-inputs .amount-group input:checked + .option {
+        color: #EA6F5A;
+        border-color: #EA6F5A;
+}
+.reward-note-modal .v-modal .main-inputs .amount-group .custom-amount:checked + .option .custom-text {
+        opacity: 0;
+}
+.reward-note-modal .v-modal .main-inputs .amount-group .custom-amount:checked + .option .custom-amount-input {
+        opacity: 1;
+}
+.reward-note-modal .v-modal .main-inputs .amount-group .option {
+        position: relative;
+        margin: 0 5px 15px;
+        width: 156px;
+        height: 56px;
+        line-height: 54px;
+        border: 1px solid #E6E6E6;
+        border-radius: 4px;
+        font-weight: normal;
+        color: #999999;
+        cursor: pointer;
+}
+.reward-note-modal .v-modal .main-inputs .amount-group .option i {
+          font-size: 16px;
+          vertical-align: middle;
+}
+.reward-note-modal .v-modal .main-inputs .amount-group .option .amount {
+          font-size: 28px;
+          vertical-align: middle;
+}
+.reward-note-modal .v-modal .main-inputs .amount-group .option .piece {
+          font-size: 13px;
+          vertical-align: sub;
+}
+.reward-note-modal .v-modal .main-inputs .amount-group .option .custom-amount-input {
+          position: absolute;
+          top: 0;
+          z-index: -1;
+          width: 100%;
+          opacity: 0;
+}
+.reward-note-modal .v-modal .main-inputs .amount-group .option .custom-amount-input i {
+            position: absolute;
+            top: 0;
+            left: 10px;
+}
+.reward-note-modal .v-modal .main-inputs .amount-group .option .custom-amount-input .piece {
+            position: absolute;
+            top: 4px;
+            right: 10px;
+}
+.reward-note-modal .v-modal .main-inputs .amount-group .option .custom-amount-input input {
+            display: block;
+            margin: 0 auto;
+            width: 80px;
+            height: 54px;
+            line-height: 54px;
+            border: none;
+            font-size: 28px;
+            text-align: center;
+            background: transparent;
+            -moz-appearance: textfield;
+}
+.reward-note-modal .v-modal .main-inputs .amount-group .option .custom-amount-input input::-webkit-outer-spin-button, .reward-note-modal .v-modal .main-inputs .amount-group .option .custom-amount-input input::-webkit-inner-spin-button {
+              -webkit-appearance: none !important;
+}
+.reward-note-modal .v-modal .main-inputs .message {
+      padding: 15px 20px;
+      margin-bottom: 0;
+      font-size: 14px;
+      border: 1px solid #E6E6E6;
+      color: #333333;
+      border-radius: 4px;
+      background-color: rgba(180, 180, 180, 0.1);
+}
+.reward-note-modal .v-modal .main-inputs .message textarea {
+        width: 100%;
+        height: 44px;
+        padding: 0;
+        margin: 0;
+        resize: none;
+        background: none !important;
+        border: none !important;
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+        -webkit-box-shadow: none;
+                box-shadow: none;
+}
+.reward-note-modal .v-modal .main-inputs .message textarea:focus {
+          outline: none;
+}
+.reward-note-modal .v-modal .reward-info .amount {
+    font-size: 28px;
+    font-weight: bold;
+    color: #EA6F5A;
+}
+.reward-note-modal .v-modal .reward-info .pay-method {
+    font-size: 14px;
+}
+.reward-note-modal .v-modal .reward-info .pay-method a {
+      color: #3194D0;
+}
+.reward-note-modal .v-modal .choose-pay {
+    margin: 0 -5px;
+}
+.reward-note-modal .v-modal .choose-pay input {
+      display: none;
+}
+.reward-note-modal .v-modal .choose-pay input:checked + .option {
+      color: #EA6F5A;
+      border-color: #EA6F5A;
+}
+.reward-note-modal .v-modal .choose-pay .option {
+      margin: 20px 5px 10px;
+      width: 156px;
+      height: 56px;
+      line-height: 54px;
+      text-align: center;
+      border: 1px solid #E6E6E6;
+      border-radius: 4px;
+      cursor: pointer;
+}
+.reward-note-modal .v-modal .choose-pay .option img {
+        height: 30px;
+}
+.reward-note-modal .v-modal .choose-pay .option img.day.alipay, .reward-note-modal .v-modal .choose-pay .option img.night.alipay {
+        min-width: 85px;
+}
+.reward-note-modal .v-modal .choose-pay .option img.day.wechat, .reward-note-modal .v-modal .choose-pay .option img.night.wechat {
+        min-width: 112px;
+}
+.reward-note-modal .v-modal .choose-pay .option img.night {
+        display: none;
+}
+.reward-note-modal .v-modal .choose-pay .tooltip {
+      width: 230px;
+}
+.reward-note-modal .v-modal .modal-footer {
+    padding: 0 15px 20px;
+    border: none;
+    background-color: transparent;
+    text-align: center;
+}
+.reward-note-modal .v-modal .modal-footer .btn {
+      padding: 8px 45px;
+      font-size: 24px;
+}
+.reward-note-modal .v-modal .btn-pay {
+    padding: 8px 25px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #F5A623;
+}
+.weixin-pay, .success-pay {
+  text-align: center;
+}
+.weixin-pay .v-modal, .success-pay .v-modal {
+    width: 350px;
+}
+.weixin-pay .ic-successed, .success-pay .ic-successed {
+    font-size: 60px;
+    color: #3db922;
+}
+.weixin-pay h2, .weixin-pay h3, .success-pay h2, .success-pay h3 {
+    margin-bottom: 20px;
+    color: #333333;
+}
+.weixin-pay h2, .success-pay h2 {
+    margin: 0 0 40px 0;
+    font-size: 24px;
+}
+.weixin-pay .bind-text, .success-pay .bind-text {
+    position: relative;
+    margin-bottom: 30px;
+    font-size: 14px;
+    color: #999999;
+}
+.weixin-pay .bind-text:before, .weixin-pay .bind-text:after, .success-pay .bind-text:before, .success-pay .bind-text:after {
+      content: "";
+      border-top: 1px solid #999;
+      display: block;
+      position: absolute;
+      width: 40px;
+      top: 8px;
+}
+.weixin-pay .bind-text:before, .success-pay .bind-text:before {
+      left: 30px;
+}
+.weixin-pay .bind-text:after, .success-pay .bind-text:after {
+      right: 30px;
+}
+.weixin-pay .share-bind, .success-pay .share-bind {
+    display: block;
+    margin-bottom: 30px;
+}
+.weixin-pay .share-bind i, .success-pay .share-bind i {
+      margin-right: 4px;
+      font-size: 22px;
+      vertical-align: middle;
+}
+.weixin-pay .share-bind.wechat i, .success-pay .share-bind.wechat i {
+      color: #00BB29;
+}
+.weixin-pay .share-bind.weibo i, .success-pay .share-bind.weibo i {
+      color: #E05244;
+}
+.weixin-pay .wx-qr-code, .success-pay .wx-qr-code {
+    display: inline-block;
+}
+.weixin-pay .wx-qr-code img, .success-pay .wx-qr-code img {
+      margin: 0 auto;
+      padding: 10px;
+      width: 200px;
+      background-color: #ffffff;
+}
+.weixin-pay .pay-amount, .success-pay .pay-amount {
+    margin: 20px 0;
+    color: #787878;
+}
+.weixin-pay .pay-amount span, .success-pay .pay-amount span {
+      color: #F5A623;
+}
+</style><style type="text/css">
+@charset "UTF-8";
+/*
+ * 变量
+*/
+.v-modal-wrap {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background-color: transparent;
+}
+.v-modal-wrap.modal-leave-active {
+    -webkit-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+}
+.v-modal-wrap.modal-enter-active .v-modal-mask, .v-modal-wrap.modal-leave-active .v-modal-mask {
+    opacity: 0;
+}
+.v-modal-wrap.modal-enter-active .v-modal, .v-modal-wrap.modal-leave-active .v-modal {
+    -webkit-transform: translate(-50%, -70%);
+        -ms-transform: translate(-50%, -70%);
+            transform: translate(-50%, -70%);
+    opacity: 0;
+}
+.v-modal-wrap .v-modal-mask {
+    background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    -webkit-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+    opacity: 1;
+}
+.v-modal-wrap .v-modal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+    transition: opacity 0.3s, -webkit-transform 0.3s;
+    -o-transition: opacity 0.3s, transform 0.3s;
+    transition: opacity 0.3s, transform 0.3s;
+    transition: opacity 0.3s, transform 0.3s, -webkit-transform 0.3s;
+    opacity: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    overflow: hidden;
+}
+.v-modal-wrap .v-modal > header:before, .v-modal-wrap .v-modal > header:after, .v-modal-wrap .v-modal > main:before, .v-modal-wrap .v-modal > main:after, .v-modal-wrap .v-modal > footer:before, .v-modal-wrap .v-modal > footer:after {
+      content: '';
+      clear: both;
+      display: table;
+}
+.v-modal-wrap .v-modal > header {
+      padding: 20px;
+      border-bottom: 1px solid #F0F0F0;
+}
+.v-modal-wrap .v-modal > header h4 {
+        margin: 0;
+        color: #333;
+        text-align: left;
+}
+.v-modal-wrap .v-modal .close {
+      position: absolute;
+      right: 16px;
+      top: 20px;
+      font-size: 26px;
+      line-height: 20px;
+      color: rgba(0, 0, 0, 0.8);
+}
+.v-modal-wrap .v-modal .close:hover {
+        color: #000000;
+}
+.v-modal-wrap .v-modal > main {
+      padding: 20px 20px 20px 20px;
+      font-size: 15px;
+      color: #333;
+      -webkit-box-flex: 1;
+      -webkit-flex-grow: 1;
+          -ms-flex-positive: 1;
+              flex-grow: 1;
+      overflow-x: hidden;
+      overflow-y: auto;
+}
+.v-modal-wrap .v-modal > footer {
+      padding: 20px;
+      background-color: #fff;
+}
+.v-modal-wrap .v-modal > footer button {
+        padding: 0;
+        margin: 0;
+        background-color: transparent;
+        border: 0;
+        float: right;
+}
+.v-modal-wrap .v-modal > footer button:focus {
+          outline: 0;
+}
+.v-modal-wrap .v-modal > footer .submit {
+        padding: 4px 12px;
+        border: 1px solid;
+        border-radius: 20px;
+}
+.v-modal-wrap .v-modal > footer .cancel {
+        margin-top: 5px;
+}
+.v-modal-wrap .v-modal > footer .cancel:hover {
+          color: #333333;
+}
+.reader-night-mode .v-modal-wrap .v-modal-mask {
+  background-color: rgba(63, 63, 63, 0.7);
+}
+.reader-night-mode .v-modal-wrap .v-modal {
+  background-color: #3f3f3f;
+}
+.reader-night-mode .v-modal-wrap .v-modal header {
+    border-color: #2F2F2F;
+}
+.reader-night-mode .v-modal-wrap .v-modal header h4 {
+      color: #C8C8C8;
+}
+.reader-night-mode .v-modal-wrap .v-modal .close {
+    color: #C8C8C8;
+}
+.reader-night-mode .v-modal-wrap .v-modal .close:hover {
+      color: #ffffff;
+}
+.reader-night-mode .v-modal-wrap .v-modal main {
+    color: #C8C8C8;
+}
+.reader-night-mode .v-modal-wrap .v-modal footer {
+    background-color: #3f3f3f;
+}
+.reader-night-mode .v-modal-wrap .v-modal footer .cancel:hover {
+      color: #C8C8C8;
+}
+</style><style type="text/css">
+@charset "UTF-8";
+/*
+ * 变量
+*/
+.like[data-v-6ddd02c6] {
+  display: inline-block;
+}
+.like .like-group[data-v-6ddd02c6] {
+    position: relative;
+    padding: 13px 0 15px 0;
+    font-size: 0;
+    border: 1px solid #EA6F5A;
+    border-radius: 40px;
+}
+.like .like-group[data-v-6ddd02c6]:hover {
+      background-color: rgba(236, 97, 73, 0.05);
+}
+.like .like-group .btn-like[data-v-6ddd02c6] {
+      display: inline-block;
+      font-size: 19px;
+}
+.like .like-group .btn-like[data-v-6ddd02c6]:before {
+        content: '';
+        position: absolute;
+        left: 12px;
+        top: 2px;
+        width: 50px;
+        height: 50px;
+        background-image: url(//cdn2.jianshu.io/assets/web/like_animation_steps-62a00a7b52377d3069927cdb8e61fd34.png);
+        background-position: left;
+        background-repeat: no-repeat;
+        background-size: 1000px 50px;
+}
+.like .like-group .btn-like a[data-v-6ddd02c6] {
+        position: relative;
+        padding: 18px 30px 18px 55px;
+        color: #EA6F5A;
+}
+.like .like-group .modal-wrap[data-v-6ddd02c6] {
+      font-size: 18px;
+      border-left: 1px solid rgba(236, 97, 73, 0.4);
+      display: inline-block;
+      margin-left: -15px;
+}
+.like .like-group .modal-wrap a[data-v-6ddd02c6] {
+        color: #EA6F5A;
+        padding: 18px 26px 18px 18px;
+}
+.like .like-group.like-animation[data-v-6ddd02c6], .like .like-group.active[data-v-6ddd02c6] {
+      background-color: #EA6F5A;
+}
+.like .like-group.like-animation .btn-like a[data-v-6ddd02c6], .like .like-group.active .btn-like a[data-v-6ddd02c6] {
+        color: white;
+}
+.like .like-group.like-animation .modal-wrap[data-v-6ddd02c6], .like .like-group.active .modal-wrap[data-v-6ddd02c6] {
+        border-left: 1px solid white;
+}
+.like .like-group.like-animation .modal-wrap a[data-v-6ddd02c6], .like .like-group.active .modal-wrap a[data-v-6ddd02c6] {
+          color: white;
+}
+.like .like-group.like-animation .btn-like[data-v-6ddd02c6]:before {
+      -webkit-animation: likeBlast-data-v-6ddd02c6 0.6s 1 steps(19);
+              animation: likeBlast-data-v-6ddd02c6 0.6s 1 steps(19);
+      background-position: right;
+}
+@-webkit-keyframes likeBlast {
+0% {
+    background-position: left;
+}
+100% {
+    background-position: right;
+}
+}
+@keyframes likeBlast-data-v-6ddd02c6 {
+0% {
+    background-position: left;
+}
+100% {
+    background-position: right;
+}
+}
+.like .like-group.active .btn-like[data-v-6ddd02c6]:before {
+      background-position: right;
+}
+</style><style type="text/css">
+@charset "UTF-8";
+/*
+ * 变量
+*/
+.main {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 0 30px 0;
+  width: 620px;
+}
+.main .title {
+    padding-left: 8px;
+    border-left: 3px solid #EA6F5A;
+    line-height: 1;
+    font-size: 15px;
+}
+.main .collection-settings {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    font-size: 13px;
+    color: #A0A0A0;
+}
+.main .collection-settings span {
+      padding-left: 4px;
+}
+.main .include-collection {
+    width: 100%;
+    padding-top: 20px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+}
+.main .include-collection .item {
+      display: inline-block;
+      margin: 0 12px 12px 0;
+      min-height: 32px;
+      background-color: white;
+      border: 1px solid #DCDCDC;
+      border-radius: 4px;
+      vertical-align: top;
+      overflow: hidden;
+}
+.main .include-collection .item img {
+        width: 32px;
+        height: 32px;
+}
+.main .include-collection .item .name {
+        display: inline-block;
+        padding: 0 10px;
+        font-size: 14px;
+}
+.main .include-collection .add-collection-wrap {
+      margin: 0 12px 12px 0;
+}
+.main .include-collection .add-collection {
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 1px solid #DCDCDC;
+      border-radius: 4px;
+}
+.main .include-collection .add-collection i {
+        margin-right: 4px;
+        color: #969696;
+}
+.main .recommend-note a {
+    position: relative;
+    margin: 20px 2px 0 0;
+    width: 200px;
+    height: 160px;
+    display: inline-block;
+}
+.main .recommend-note a:after {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 160px;
+      border-radius: 0 0 4px 4px;
+      -webkit-box-shadow: inset 0px -80px 50px -22px rgba(0, 0, 0, 0.6);
+              box-shadow: inset 0px -80px 50px -22px rgba(0, 0, 0, 0.6);
+      top: 0;
+      left: 0;
+      z-index: 1;
+}
+.main .recommend-note .name {
+    position: absolute;
+    bottom: 40px;
+    left: 10px;
+    right: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #ffffff;
+    z-index: 2;
+}
+.main .recommend-note .author {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    z-index: 2;
+}
+.main .recommend-note .avatar {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+.main .recommend-note .avatar img {
+      border-radius: 50%;
+}
+.main .recommend-note .author-name {
+    font-size: 12px;
+    color: #ffffff;
+    display: inline-block;
+    vertical-align: -1px;
+}
+.main .show-more {
+    margin: 0 12px 12px 0;
+    font-size: 14px;
+    color: #A0A0A0;
+}
+</style></head>
+
+  <!-- 只给10%的用户添加代码 -->
+  <body lang="zh-CN" class="reader-black-font">
+    <!-- 全局顶部导航栏 -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="width-limit">
+    <!-- 左上方 Logo -->
+    <a class="logo" href="https://www.jianshu.com/"><img src="./webpack4.x入门配置 - 简书_files/nav-logo-4c7bbafe27adc892f3046e6978459bac.png" alt="Nav logo"></a>
+
+    <!-- 右上角 -->
+      <!-- 未登录显示登录/注册/写文章 -->
+      <a class="btn write-btn" target="_blank" href="https://www.jianshu.com/writer#/">
+        <i class="iconfont ic-write"></i>写文章
+</a>      <a class="btn sign-up" id="sign_up" href="https://www.jianshu.com/sign_up">注册</a>
+      <a class="btn log-in" id="sign_in" href="https://www.jianshu.com/sign_in">登录</a>
+
+    <!-- 如果用户登录，显示下拉菜单 -->
+
+    <div class="style-mode"><a class="style-mode-btn"><i class="iconfont ic-navigation-mode"></i></a> <div class="popover-modal" style="left: 0px; display: none;"><div class="meta"><i class="iconfont ic-navigation-night"></i><span>夜间模式</span></div> <div class="switch day-night-group"><a class="switch-btn">开</a> <a class="switch-btn active">关</a></div> <hr> <div class="switch font-family-group"><a class="switch-btn font-song">宋体</a> <a class="switch-btn font-hei active">黑体</a></div> <div class="switch"><a class="switch-btn active">简</a> <a class="switch-btn">繁</a></div></div></div>
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="nav navbar-nav">
+            <li class="tab ">
+              <a href="https://www.jianshu.com/">
+                <span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+</a>            </li>
+            <li class="tab ">
+              <a id="web-nav-app-download-btn" class="app-download-btn" href="https://www.jianshu.com/apps?utm_medium=desktop&amp;utm_source=navbar-apps"><span class="menu-text">下载App</span><i class="iconfont ic-navigation-download menu-icon"></i></a>
+            </li>
+          <li class="search">
+            <form target="_blank" action="https://www.jianshu.com/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+              <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索" class="search-input">
+              <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
+</form>          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    
+<div class="note">
+    <a target="_blank" href="https://www.jianshu.com/apps/redirect?utm_source=side-banner-click" id="web-note-ad-fixed"><span class="close">×</span></a>
+  <div class="post">
+    <div class="article">
+        <h1 class="title">webpack4.x入门配置</h1>
+
+        <!-- 作者区域 -->
+        <div class="author">
+          <a class="avatar" href="https://www.jianshu.com/u/0317103726b7">
+            <img src="./webpack4.x入门配置 - 简书_files/76613eae-714c-4af7-be18-f8656198b8b0" alt="96">
+</a>          <div class="info">
+            <span class="name"><a href="https://www.jianshu.com/u/0317103726b7">素时年锦</a></span>
+            <!-- 关注用户按钮 -->
+            <a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
+            <!-- 文章数据信息 -->
+            <div class="meta">
+              <!-- 如果文章更新时间大于发布时间，那么使用 tooltip 显示更新时间 -->
+                <span class="publish-time" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="最后编辑于 2018.04.28 00:23">2018.04.22 19:47*</span>
+              <span class="wordage">字数 2398</span>
+            <span class="views-count">阅读 20161</span><span class="comments-count">评论 47</span><span class="likes-count">喜欢 84</span><span class="rewards-count ">赞赏 1</span></div>
+          </div>
+          <!-- 如果是当前作者，加入编辑按钮 -->
+        </div>
+
+
+        <!-- 文章内容 -->
+        <div data-note-content="" class="show-content">
+          <div class="show-content-free">
+            <p>1、首先<code>npm install webpack webpack-cli webpack-dev-server -g</code> (mac电脑用超级管理员的形式进行安装需要前面加上sudo,Windows 电脑不用加sudo)</p><div class="image-package">
+<div class="image-container" style="max-width: 559px; max-height: 117px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 20.93%;"></div>
+<div class="image-view" data-width="559" data-height="117"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-566432cde5b2af88.png" data-original-width="559" data-original-height="117" data-original-format="image/png" data-original-filesize="17170" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-566432cde5b2af88.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>1.1输密文的密码（也就是电脑登陆的密码）安装开始…………<br>
+<div class="image-package">
+<div class="image-container" style="max-width: 566px; max-height: 79px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 13.96%;"></div>
+<div class="image-view" data-width="566" data-height="79"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-ecd1003e8d99e23a.png" data-original-width="566" data-original-height="79" data-original-format="image/png" data-original-filesize="14468" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-ecd1003e8d99e23a.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>1.2安装成功如下<br>
+<div class="image-package">
+<div class="image-container" style="max-width: 566px; max-height: 305px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 53.89000000000001%;"></div>
+<div class="image-view" data-width="566" data-height="305"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-dbd7f80d729e4f04.png" data-original-width="566" data-original-height="305" data-original-format="image/png" data-original-filesize="67771" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-dbd7f80d729e4f04.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><p></p>
+<p>2、输入命令<code>mkdir config dist src</code>创建三个文件夹</p><div class="image-package">
+<div class="image-container" style="max-width: 566px; max-height: 114px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 20.14%;"></div>
+<div class="image-view" data-width="566" data-height="114"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-1511f590314d1c61.png" data-original-width="566" data-original-height="114" data-original-format="image/png" data-original-filesize="15189" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-1511f590314d1c61.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>2.1文件夹如下所示：<div class="image-package">
+<div class="image-container" style="max-width: 371px; max-height: 163px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 43.94%;"></div>
+<div class="image-view" data-width="371" data-height="163"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-45da6d467bdd41f5.png" data-original-width="371" data-original-height="163" data-original-format="image/png" data-original-filesize="8425" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-45da6d467bdd41f5.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+3、输入命令<code>npm init -y</code><br>
+<div class="image-package">
+<div class="image-container" style="max-width: 568px; max-height: 338px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 59.51%;"></div>
+<div class="image-view" data-width="568" data-height="338"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-4396c8384db17fe3.png" data-original-width="568" data-original-height="338" data-original-format="image/png" data-original-filesize="42194" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-4396c8384db17fe3.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>3.1细心的你应该发现编辑器里面多了package.json这个文件<div class="image-package">
+<div class="image-container" style="max-width: 380px; max-height: 148px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 38.95%;"></div>
+<div class="image-view" data-width="380" data-height="148"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-5ab24eff8dd58632.png" data-original-width="380" data-original-height="148" data-original-format="image/png" data-original-filesize="10182" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-5ab24eff8dd58632.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+package.json文件里面的内容是最初的样子<p></p>
+<pre class="hljs json"><code class="json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"study_webpack2"</span>,
+  <span class="hljs-attr">"version"</span>: <span class="hljs-string">"1.0.0"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">""</span>,
+  <span class="hljs-attr">"main"</span>: <span class="hljs-string">"index.js"</span>,
+  <span class="hljs-attr">"scripts"</span>: {
+    <span class="hljs-attr">"test"</span>: <span class="hljs-string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
+  },
+  <span class="hljs-attr">"keywords"</span>: [],
+  <span class="hljs-attr">"author"</span>: <span class="hljs-string">""</span>,
+  <span class="hljs-attr">"license"</span>: <span class="hljs-string">"ISC"</span>
+}
+
+</code></pre>
+<p>4、输入命令<code>touch dist/index.html src/index.js</code>分别dist和src文件夹下面创建一个index.html文件和index.js文件</p><div class="image-package">
+<div class="image-container" style="max-width: 567px; max-height: 170px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 29.98%;"></div>
+<div class="image-view" data-width="567" data-height="170"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-dae9fb37238d0360.png" data-original-width="567" data-original-height="170" data-original-format="image/png" data-original-filesize="16807" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-dae9fb37238d0360.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>项目目录目前如下：<div class="image-package">
+<div class="image-container" style="max-width: 370px; max-height: 179px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 48.38%;"></div>
+<div class="image-view" data-width="370" data-height="179"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-16b979a9a48c43f3.png" data-original-width="370" data-original-height="179" data-original-format="image/png" data-original-filesize="10371" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-16b979a9a48c43f3.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+5、webpack4.x中打包默认找src/index.js作为默认入口，可以直接在终端中输入命令<code>webpack</code> 将当前的内容进行一个简单的打包<div class="image-package">
+<div class="image-container" style="max-width: 572px; max-height: 334px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 58.39%;"></div>
+<div class="image-view" data-width="572" data-height="334"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-8fe213d965057f24.png" data-original-width="572" data-original-height="334" data-original-format="image/png" data-original-filesize="61846" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-8fe213d965057f24.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>这时候看下你的项目目录dist文件下是不是多了一个main.js文件<br>
+<div class="image-package">
+<div class="image-container" style="max-width: 371px; max-height: 215px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 57.95%;"></div>
+<div class="image-view" data-width="371" data-height="215"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-763fa2969730e110.png" data-original-width="371" data-original-height="215" data-original-format="image/png" data-original-filesize="11853" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-763fa2969730e110.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>5.1细心的小伙伴应该看到打包的时候终端中会出现黄色的警告提示<p></p>
+<pre class="hljs bash"><code class="bash">WARNING <span class="hljs-keyword">in</span> configuration
+The <span class="hljs-string">'mode'</span> option has not been <span class="hljs-built_in">set</span>, webpack will fallback to <span class="hljs-string">'production'</span> <span class="hljs-keyword">for</span> this value. Set <span class="hljs-string">'mode'</span> option to <span class="hljs-string">'development'</span> or <span class="hljs-string">'production'</span> to <span class="hljs-built_in">enable</span> defaults <span class="hljs-keyword">for</span> each environment.
+You can also <span class="hljs-built_in">set</span> it to <span class="hljs-string">'none'</span> to <span class="hljs-built_in">disable</span> any default behavior. Learn more: https://webpack.js.org/concepts/mode/
+</code></pre>
+<p>mode是webpack中独有的，有两种打包环境，一个是开发环境：<code>development</code>另外一个是生产环境：<code>production</code><br>
+打包的时候输入<code>webpack --mode=development</code>或者<code>webpack --mode=production</code>就不会出现警告提示了</p><div class="image-package">
+<div class="image-container" style="max-width: 568px; max-height: 227px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 39.96%;"></div>
+<div class="image-view" data-width="568" data-height="227"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-72639085ee3ad402.png" data-original-width="568" data-original-height="227" data-original-format="image/png" data-original-filesize="41988" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-72639085ee3ad402.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>下面是<code>webapck --mode=production</code>命令打包，这个是代码压缩过的，细心的朋友应该也发现打包后小了很多<div class="image-package">
+<div class="image-container" style="max-width: 582px; max-height: 205px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 35.22%;"></div>
+<div class="image-view" data-width="582" data-height="205"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-04c27fb22b26474c.png" data-original-width="582" data-original-height="205" data-original-format="image/png" data-original-filesize="42168" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-04c27fb22b26474c.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>同时项目文件夹下面多了 一个node_modules文件夹<br>
+<div class="image-package">
+<div class="image-container" style="max-width: 370px; max-height: 261px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 70.54%;"></div>
+<div class="image-view" data-width="370" data-height="261"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-34f7020c8ee601ec.png" data-original-width="370" data-original-height="261" data-original-format="image/png" data-original-filesize="16690" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-34f7020c8ee601ec.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+6、输入命令<code>touch config/webpack.dev.js</code>创建文件<div class="image-package">
+<div class="image-container" style="max-width: 567px; max-height: 123px; background-color: transparent;">
+<div class="image-container-fill" style="padding-bottom: 21.69%;"></div>
+<div class="image-view" data-width="567" data-height="123"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-939939216a6d0512.png" data-original-width="567" data-original-height="123" data-original-format="image/png" data-original-filesize="18049" class="" style="cursor: zoom-in;" src="./webpack4.x入门配置 - 简书_files/8701263-939939216a6d0512.png"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>回车后，现在项目目录如下：<div class="image-package">
+<div class="image-container" style="max-width: 366px; max-height: 269px;">
+<div class="image-container-fill" style="padding-bottom: 73.5%;"></div>
+<div class="image-view" data-width="366" data-height="269"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-b446ab8c54c94de6.png" data-original-width="366" data-original-height="269" data-original-format="image/png" data-original-filesize="16112" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+7、输入命令<code>rm dist/main.js src/index.js</code>移除掉这两个文件我们自己来配置<div class="image-package">
+<div class="image-container" style="max-width: 568px; max-height: 91px;">
+<div class="image-container-fill" style="padding-bottom: 16.02%;"></div>
+<div class="image-view" data-width="568" data-height="91"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-1fe1b0b0ed6a58ba.png" data-original-width="568" data-original-height="91" data-original-format="image/png" data-original-filesize="16763" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>项目目录如下：<div class="image-package">
+<div class="image-container" style="max-width: 376px; max-height: 249px;">
+<div class="image-container-fill" style="padding-bottom: 66.22%;"></div>
+<div class="image-view" data-width="376" data-height="249"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-e7ad462970e09663.png" data-original-width="376" data-original-height="249" data-original-format="image/png" data-original-filesize="14440" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+7.1 现在在src文件夹下面创建main.js文件<div class="image-package">
+<div class="image-container" style="max-width: 374px; max-height: 210px;">
+<div class="image-container-fill" style="padding-bottom: 56.15%;"></div>
+<div class="image-view" data-width="374" data-height="210"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-00b1c9a9070dd4b6.png" data-original-width="374" data-original-height="210" data-original-format="image/png" data-original-filesize="14891" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+7.2进入到webpack.dev.js文件中进行配置，具体在代码中注释（这里简单的一些，具体的下面会给大家）<br>
+<div class="image-package">
+<div class="image-container" style="max-width: 560px; max-height: 478px;">
+<div class="image-container-fill" style="padding-bottom: 85.36%;"></div>
+<div class="image-view" data-width="560" data-height="478"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-8fdf8faf52418e73.png" data-original-width="560" data-original-height="478" data-original-format="image/png" data-original-filesize="72016" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><p></p>
+<p>7.3现在不能执行之前的webpack --mode="development"命令了会报下面的错误</p><div class="image-package">
+<div class="image-container" style="max-width: 567px; max-height: 230px;">
+<div class="image-container-fill" style="padding-bottom: 40.56%;"></div>
+<div class="image-view" data-width="567" data-height="230"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-7856385421230a7b.png" data-original-width="567" data-original-height="230" data-original-format="image/png" data-original-filesize="36640" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>这里是因为webpack4打包默认找的src下面的index.js入口，我们前面已经删除了，这里src下面死main.js文件，所以找不到就报<code>ERROR in Entry module not found: Error: Can't resolve './src' in '/Users/yubo/Desktop/www/study_webpack2'</code>错误，所以这里我们到packsge.json里面配置下命令，让打包的时候执行我们在config/webpack.dev.js下面配置的入口。<div class="image-package">
+<div class="image-container" style="max-width: 606px; max-height: 289px;">
+<div class="image-container-fill" style="padding-bottom: 47.69%;"></div>
+<div class="image-view" data-width="606" data-height="289"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-084ca775ca1bb98a.png" data-original-width="606" data-original-height="289" data-original-format="image/png" data-original-filesize="43669" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+这个时候我们在终端执行输入命令 <code>npm run build</code>就可以了<br>
+<div class="image-package">
+<div class="image-container" style="max-width: 563px; max-height: 314px;">
+<div class="image-container-fill" style="padding-bottom: 55.769999999999996%;"></div>
+<div class="image-view" data-width="563" data-height="314"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-68248a3d06c52e33.png" data-original-width="563" data-original-height="314" data-original-format="image/png" data-original-filesize="49879" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+8、现在配置打包时候的入口文件以及出口文件，很多朋友应该也看到webpack.dev.js中的注释的，这里的入口是  <code>'./src/main.js'</code><p></p>
+<pre class="hljs java"><code class="java"> <span class="hljs-comment">//入口文件的配置项</span>
+    entry:{
+         <span class="hljs-comment">//里面的main是可以随便写的</span>
+         main:<span class="hljs-string">'./src/main.js'</span>
+    }
+</code></pre>
+<p></p>
+<p></p>
+这个时候我们有两个文件入口这么办呢？现在我们再src文件夹下面创建main2.js<div class="image-package">
+<div class="image-container" style="max-width: 365px; max-height: 238px;">
+<div class="image-container-fill" style="padding-bottom: 65.21000000000001%;"></div>
+<div class="image-view" data-width="365" data-height="238"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-145e608c18b0a2f4.png" data-original-width="365" data-original-height="238" data-original-format="image/png" data-original-filesize="15846" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>
+<pre class="hljs java"><code class="java">  <span class="hljs-comment">//入口文件的配置项</span>
+    entry:{
+         <span class="hljs-comment">//里面的main是可以随便写的</span>
+         main:<span class="hljs-string">'./src/main.js'</span>,
+         main:<span class="hljs-string">'./src/main2.js'</span> <span class="hljs-comment">//这里新添加一个入口文件</span>
+    },
+</code></pre>
+<p>这个时候我们再使用之前配置的命令   <code>npm run build</code> 进行打包</p><div class="image-package">
+<div class="image-container" style="max-width: 690px; max-height: 532px;">
+<div class="image-container-fill" style="padding-bottom: 77.10000000000001%;"></div>
+<div class="image-view" data-width="690" data-height="532"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-1c6eea3c32553afb.png" data-original-width="690" data-original-height="532" data-original-format="image/png" data-original-filesize="99952" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+我们会发现报错提示  Conflict: Multiple assets emit to the same filename bundle.js 翻译过来告诉我们 冲突:多个资产发出相同的文件名bundle.js。这个时候就需要我们来配置出口文件了，下面是之前的出口文件<p></p>
+<pre class="hljs java"><code class="java"> <span class="hljs-comment">//出口文件的配置项</span>
+    output:{
+         <span class="hljs-comment">//打包的路径</span>
+        path:path.resolve(__dirname,<span class="hljs-string">'../dist'</span>),
+        <span class="hljs-comment">//打包的文件名称</span>
+        filename:<span class="hljs-string">'bundle.js'</span>
+    },
+</code></pre>
+<p>现在我们将原来写死的bundle.js给改成了   <code>[name].js</code> </p><div class="image-package">
+<div class="image-container" style="max-width: 666px; max-height: 129px;">
+<div class="image-container-fill" style="padding-bottom: 19.37%;"></div>
+<div class="image-view" data-width="666" data-height="129"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-dee9fc9f9eece797.png" data-original-width="666" data-original-height="129" data-original-format="image/png" data-original-filesize="27231" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>这个时候我们再执行打包命令看下<div class="image-package">
+<div class="image-container" style="max-width: 564px; max-height: 319px;">
+<div class="image-container-fill" style="padding-bottom: 56.56%;"></div>
+<div class="image-view" data-width="564" data-height="319"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-a09446a6e5c74877.png" data-original-width="564" data-original-height="319" data-original-format="image/png" data-original-filesize="59950" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>已经打包好了，这个时候看下出口文件dist下面也打包生成了两个相同入口名字的文件<div class="image-package">
+<div class="image-container" style="max-width: 270px; max-height: 296px;">
+<div class="image-container-fill" style="padding-bottom: 109.63000000000001%;"></div>
+<div class="image-view" data-width="270" data-height="296"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-aacd78ae30d3a769.png" data-original-width="270" data-original-height="296" data-original-format="image/png" data-original-filesize="19271" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+注：[name]的意思是根据入口文件的名称，打包成相同的名称，有几个入口文件，就可以打包出几个文件。<p></p>
+<p>9 、设置webpack-dev-server，刚开始的时候我们就全局下载这里就不需要下载了，现在需要配置一下devServer。最简单的devServer配置项只有四个</p><div class="image-package">
+<div class="image-container" style="max-width: 528px; max-height: 199px;">
+<div class="image-container-fill" style="padding-bottom: 37.69%;"></div>
+<div class="image-view" data-width="528" data-height="199"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-a56707858adb2126.png" data-original-width="528" data-original-height="199" data-original-format="image/png" data-original-filesize="36614" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+这个时候直接执行命令<code>webpack-dev-server</code>会报错<div class="image-package">
+<div class="image-container" style="max-width: 629px; max-height: 446px;">
+<div class="image-container-fill" style="padding-bottom: 70.91%;"></div>
+<div class="image-view" data-width="629" data-height="446"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-d016aaee4d92b688.png" data-original-width="629" data-original-height="446" data-original-format="image/png" data-original-filesize="127005" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>这个时候我们可以到packsge.json里面配置下<div class="image-package">
+<div class="image-container" style="max-width: 604px; max-height: 320px;">
+<div class="image-container-fill" style="padding-bottom: 52.980000000000004%;"></div>
+<div class="image-view" data-width="604" data-height="320"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-35733ab6a74ea67e.png" data-original-width="604" data-original-height="320" data-original-format="image/png" data-original-filesize="45363" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+这个时候我们终端输入命令<code>npm run server</code>就可以跑起来了<div class="image-package">
+<div class="image-container" style="max-width: 662px; max-height: 313px;">
+<div class="image-container-fill" style="padding-bottom: 47.28%;"></div>
+<div class="image-view" data-width="662" data-height="313"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-9536dc9a116412c9.png" data-original-width="662" data-original-height="313" data-original-format="image/png" data-original-filesize="60794" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>然后我们再到项目dist文件夹下面的index.html  文件中引入打包的两个js<p></p>
+<pre class="hljs xml"><code class="xml"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"X-UA-Compatible"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"ie=edge"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Document<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"study"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./main.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./main2.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p>保存后再到src文件下面分别给main.js和main2.js文件里面写一些东西。</p>
+<p>这个是<code>src/main.js</code>文件下：</p>
+<pre class="hljs bash"><code class="bash">alert(<span class="hljs-string">"11111"</span>)
+</code></pre>
+<p>这个是<code>src/main2.js</code>文件下：</p>
+<pre class="hljs javascript"><code class="javascript"><span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"study"</span>).innerHTML=<span class="hljs-string">"hello webpack"</span>
+</code></pre>
+<p>这个时候再再终端中输入命令 <code>npm run server</code> 然后再打开浏览器再地址栏输入  <code>locahost:8888</code> 就可以看到效果了，注意这里的 <code>locahost:8888</code> 是之前你在下面这个文件配置的</p>
+<pre class="hljs java"><code class="java">devServer:{
+            <span class="hljs-comment">//设置基本目录结构,用于找到程序打包地址</span>
+            contentBase:path.resolve(__dirname,<span class="hljs-string">'../dist'</span>),
+            <span class="hljs-comment">//服务器的IP地址，可以使用IP也可以使用localhost</span>
+            host:<span class="hljs-string">'localhost'</span>,
+            <span class="hljs-comment">//服务端压缩是否开启</span>
+            compress:<span class="hljs-keyword">true</span>,
+            <span class="hljs-comment">//配置服务端口号</span>
+            port:<span class="hljs-number">8888</span>
+    }
+</code></pre>
+<p>10、CSS文件打包<br>
+下面学习一下怎么样将我们的CSS文件打包，在学习CSS打包之前，需要先对webpack.dev.config.js里的Loaders配置项进行了解。<br>
+loaders可以把SASS文件的写法转换成CSS,也可以把我们项目中写的ES6、ES7等给编译成浏览器能解析的css，下面我们先在src文件夹下面创建index.css文件，并且写一些css在里面</p>
+<p>项目路径： /src/css/index.css  里面编辑代码如下</p><div class="image-package">
+<div class="image-container" style="max-width: 304px; max-height: 163px;">
+<div class="image-container-fill" style="padding-bottom: 53.620000000000005%;"></div>
+<div class="image-view" data-width="304" data-height="163"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-4a3746b17a32ed56.png" data-original-width="304" data-original-height="163" data-original-format="image/png" data-original-filesize="13551" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+这个时候需要在入口文件中引入才可以进行打包<div class="image-package">
+<div class="image-container" style="max-width: 647px; max-height: 292px;">
+<div class="image-container-fill" style="padding-bottom: 45.129999999999995%;"></div>
+<div class="image-view" data-width="647" data-height="292"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-e3653c0a916617a9.png" data-original-width="647" data-original-height="292" data-original-format="image/png" data-original-filesize="22213" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>这个时候我们在终端中输入命令进行打包，会看到这样的报错<div class="image-package">
+<div class="image-container" style="max-width: 571px; max-height: 244px;">
+<div class="image-container-fill" style="padding-bottom: 42.730000000000004%;"></div>
+<div class="image-view" data-width="571" data-height="244"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-d42464624cfd2909.png" data-original-width="571" data-original-height="244" data-original-format="image/png" data-original-filesize="42650" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>这是因为我们要想用打包css需要下载配置css 的loader：<code>style-loader 和 css-loader</code><br>
+在终端输入命令  <code>npm install style-loader css-loader --save-dev</code>下载依赖<div class="image-package">
+<div class="image-container" style="max-width: 638px; max-height: 111px;">
+<div class="image-container-fill" style="padding-bottom: 17.4%;"></div>
+<div class="image-view" data-width="638" data-height="111"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-4524f0aa38f6c920.png" data-original-width="638" data-original-height="111" data-original-format="image/png" data-original-filesize="18587" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>现在到webpack.dev.config.js中对module属性中的代码进行配置<div class="image-package">
+<div class="image-container" style="max-width: 478px; max-height: 545px;">
+<div class="image-container-fill" style="padding-bottom: 114.02000000000001%;"></div>
+<div class="image-view" data-width="478" data-height="545"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-c71247737000d990.png" data-original-width="478" data-original-height="545" data-original-format="image/png" data-original-filesize="93162" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>这个时候我们的css . loader就配置好了，可以在命令终端中试着输入   <code>npm run server</code>看下<div class="image-package">
+<div class="image-container" style="max-width: 648px; max-height: 363px;">
+<div class="image-container-fill" style="padding-bottom: 56.02%;"></div>
+<div class="image-view" data-width="648" data-height="363"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-7cb5c54e0a0ed10b.png" data-original-width="648" data-original-height="363" data-original-format="image/png" data-original-filesize="98806" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>打包成功了，然后再进入到浏览器发现已经有效果了<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 400px;">
+<div class="image-container-fill" style="padding-bottom: 55.48%;"></div>
+<div class="image-view" data-width="721" data-height="400"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-ffbae75a60eeaa3d.png" data-original-width="721" data-original-height="400" data-original-format="image/png" data-original-filesize="28362" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+11、下面我们来配置JS压缩<br>
+我的项目上线之前都会对代码进行压缩，很多都是通过插件的方式实现的，这里我们就先来引入一个uglifyjs-webpack-plugin(JS压缩插件，简称uglify)。<br>
+这里大家需要注意的：虽然uglifyjs是插件，但是webpack版本里默认已经集成，不需要再次安装。<br>
+我们需要在webpack.dev.config.js中引入uglifyjs-webpack-glugin插件<p></p>
+<pre class="hljs javascript"><code class="javascript"><span class="hljs-keyword">const</span> uglify = <span class="hljs-built_in">require</span>(<span class="hljs-string">'uglifyjs-webpack-plugin'</span>);
+</code></pre>
+<p>引入后在plugins配置里new一个 uglify对象就可以了。</p>
+<pre class="hljs cpp"><code class="cpp">plugins:[
+        <span class="hljs-keyword">new</span> uglify()
+    ],
+</code></pre>
+<p>这个时候我们再终端运行命令  <code>npm run bulid</code> 进行打包会提示下载webpack-cli 命令输入yes</p><div class="image-package">
+<div class="image-container" style="max-width: 655px; max-height: 424px;">
+<div class="image-container-fill" style="padding-bottom: 64.73%;"></div>
+<div class="image-view" data-width="655" data-height="424"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-f74a7c3eea6b7cf2.png" data-original-width="655" data-original-height="424" data-original-format="image/png" data-original-filesize="88460" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>然后下载一会，下载好了以后，看下dist下面的出口main.js文件里面的js都被压缩了<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 348px;">
+<div class="image-container-fill" style="padding-bottom: 42.91%;"></div>
+<div class="image-view" data-width="811" data-height="348"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-09f072e5b11ea892.png" data-original-width="811" data-original-height="348" data-original-format="image/png" data-original-filesize="186123" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+12、打包HTML文件<br>
+现在我们来对html进行打包，这个时候我们需要将之前手动再dist文件夹下面写的index.html文件移到src文件夹下面，并去掉我们的JS引入代码并去掉我们的JS引入代码（webpack会自动为我们引入JS），然后让打包的时候自动再dist文件夹下面生成<div class="image-package">
+<div class="image-container" style="max-width: 265px; max-height: 401px;">
+<div class="image-container-fill" style="padding-bottom: 151.32000000000002%;"></div>
+<div class="image-view" data-width="265" data-height="401"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-c05d0dd742111df3.png" data-original-width="265" data-original-height="401" data-original-format="image/png" data-original-filesize="21825" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+然后我们对webpack.dev.config.js文件进行配置，先引入html-webpack-plugin插件，然后在终端下载<p></p>
+<pre class="hljs undefined"><code>npm install --save-dev html-webpack-plugin
+</code></pre>
+<p>这个时候再到webpack.dev.config.js的plugins里面进行配置</p>
+<pre class="hljs java"><code class="java"> <span class="hljs-comment">//插件，用于生产模版和各项功能</span>
+    plugins:[
+        <span class="hljs-keyword">new</span> uglify(),  <span class="hljs-comment">//js压缩插件</span>
+        <span class="hljs-keyword">new</span> htmlPlugin({
+            minify:{ <span class="hljs-comment">//是对html文件进行压缩</span>
+                removeAttributeQuotes:<span class="hljs-keyword">true</span>  <span class="hljs-comment">//removeAttrubuteQuotes是却掉属性的双引号。</span>
+            },
+            hash:<span class="hljs-keyword">true</span>, <span class="hljs-comment">//为了开发中js有缓存效果，所以加入hash，这样可以有效避免缓存JS。</span>
+            template:<span class="hljs-string">'./src/index.html'</span> <span class="hljs-comment">//是要打包的html模版路径和文件名称。</span>
+           
+        })
+    ],
+</code></pre>
+<p>此时我们在终端输入 <code>npm run build</code> 看见dist文件下面自动为我们生成了一个index.html文件里面自动为我们引入了js如下：</p>
+<pre class="hljs xml"><code class="xml"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">en</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">UTF-8</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">viewport</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width,initial-scale=1"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">X-UA-Compatible</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"ie=edge"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Document<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">study</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">text/javascript</span> <span class="hljs-attr">src</span>=<span class="hljs-string">main.js?5a6cef00acf20ba2a991</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">text/javascript</span> <span class="hljs-attr">src</span>=<span class="hljs-string">main2.js?5a6cef00acf20ba2a991</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p>13、CSS中的图片处理<br>
+</p>
+<p></p>
+在这里我们首先在网上找一张图片，然后在src文件下面的index.html文件中创建一个div然后给一个clss名，然后在css中添加背景图，项目目录：<div class="image-package">
+<div class="image-container" style="max-width: 270px; max-height: 422px;">
+<div class="image-container-fill" style="padding-bottom: 156.29999999999998%;"></div>
+<div class="image-view" data-width="270" data-height="422"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-3e80b91739c5928a.png" data-original-width="270" data-original-height="422" data-original-format="image/png" data-original-filesize="30700" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+./src/index.html文件里面
+<pre class="hljs xml"><code class="xml"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"X-UA-Compatible"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"ie=edge"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Document<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"study"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"img"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p>./  src/css/index.css文件里面</p>
+<pre class="hljs css"><code class="css">
+<span class="hljs-selector-class">.img</span>{
+    <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(../images/photo.jpeg);
+    <span class="hljs-attribute">width</span>:<span class="hljs-number">466px</span>;
+    <span class="hljs-attribute">height</span>:<span class="hljs-number">453px</span>;
+}
+</code></pre>
+<p>打包看下会有报错</p><div class="image-package">
+<div class="image-container" style="max-width: 652px; max-height: 269px;">
+<div class="image-container-fill" style="padding-bottom: 41.260000000000005%;"></div>
+<div class="image-view" data-width="652" data-height="269"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-ff3145ad16cbe7b5.png" data-original-width="652" data-original-height="269" data-original-format="image/png" data-original-filesize="57742" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+这里是因为我们缺少loader的解析,现在需要下载两个解析图片的loader  <code>file-loader 和 url-loader</code><p></p>
+<pre class="hljs undefined"><code>npm install --save-dev file-loader url-loader
+</code></pre>
+<p>解释下：<br>
+file-loader：解决引用路径的问题，拿background样式用url引入背景图来说，我们都知道，webpack最终会将各个模块打包成一个文件，因此我们样式中的url路径是相对入口html页面的，而不是相对于原始css文件所在的路径的。这就会导致图片引入失败。这个问题是用file-loader解决的，file-loader可以解析项目中的url引入（不仅限于css），根据我们的配置，将图片拷贝到相应的路径，再根据我们的配置，修改打包后文件引用路径，使之指向正确的文件。</p>
+<p>url-loader：如果图片较多，会发很多http请求，会降低页面性能。这个问题可以通过url-loader解决。url-loader会将引入的图片编码，生成dataURl。相当于把图片数据翻译成一串字符。再把这串字符打包到文件中，最终只需要引入这个文件就能访问图片了。当然，如果图片较大，编码会消耗性能。因此url-loader提供了一个limit参数，小于limit字节的文件会被转为DataURl，大于limit的还会使用file-loader进行copy。</p>
+<p>现在需要我们去webpack.dev.config.js文件配置下</p>
+<pre class="hljs javascript"><code class="javascript"> <span class="hljs-comment">//图片 loader</span>
+            {
+                <span class="hljs-attr">test</span>:<span class="hljs-regexp">/\.(png|jpg|gif|jpeg)/</span>,  <span class="hljs-comment">//是匹配图片文件后缀名称</span>
+                use:[{
+                    <span class="hljs-attr">loader</span>:<span class="hljs-string">'url-loader'</span>, <span class="hljs-comment">//是指定使用的loader和loader的配置参数</span>
+                    options:{
+                        <span class="hljs-attr">limit</span>:<span class="hljs-number">500</span>  <span class="hljs-comment">//是把小于500B的文件打成Base64的格式，写入JS</span>
+                    }
+                }]
+            }
+
+</code></pre>
+<p>此刻我们在终端中输入 <code>npm run build</code> 打包的时候就不会报错了，也可以看到我们的图片被打包了</p><div class="image-package">
+<div class="image-container" style="max-width: 641px; max-height: 567px;">
+<div class="image-container-fill" style="padding-bottom: 88.46000000000001%;"></div>
+<div class="image-view" data-width="641" data-height="567"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-584f1c2608825ae2.png" data-original-width="641" data-original-height="567" data-original-format="image/png" data-original-filesize="123855" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+注意：为什么只使用了url-loader<br>
+有的小伙伴会发现我们并没有在webpack.dev.config.js中使用file-loader，但是依然打包成功了。我们需要了解file-loader和url-loader的关系。url-loader和file-loader是什么关系呢？简答地说，url-loader封装了file-loader。url-loader不依赖于file-loader，即使用url-loader时，只需要安装url-loader即可，不需要安装file-loader，因为url-loader内置了file-loader。通过上面的介绍，我们可以看到，url-loader工作分两种情况：<p></p>
+<p>1.文件大小小于limit参数，url-loader将会把文件转为DataURL（Base64格式）；</p>
+<p>2.文件大小大于limit，url-loader会调用file-loader进行处理，参数也会直接传给file-loader。</p>
+<p>也就是说，其实我们只安装一个url-loader就可以了。但是为了以后的操作方便，我们这里就顺便安装上file-loader。</p>
+<p>14、css分离和图片路径处理<br>
+这里我们主要学习把CSS从JavasScript代码中分离出来，还有一个是如何处理分离出来后CSS中的图片路径不对问题。<br>
+现在我们要下载一个css分离的插件：  <code>extract-text-webpack-plugin</code><br>
+我们在输入命令  <code>npm install extract-text-webpack-plugin --save-dev</code></p><div class="image-package">
+<div class="image-container" style="max-width: 625px; max-height: 299px;">
+<div class="image-container-fill" style="padding-bottom: 47.839999999999996%;"></div>
+<div class="image-view" data-width="625" data-height="299"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-8ec75599203e3ecd.png" data-original-width="625" data-original-height="299" data-original-format="image/png" data-original-filesize="46519" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+14.1下载完插件后，需要我们配置一下<div class="image-package">
+<div class="image-container" style="max-width: 632px; max-height: 248px;">
+<div class="image-container-fill" style="padding-bottom: 39.24%;"></div>
+<div class="image-view" data-width="632" data-height="248"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-cb640a8507daa310.png" data-original-width="632" data-original-height="248" data-original-format="image/png" data-original-filesize="66327" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+14.2配置后需要在plugins属性中进行配置<p></p>
+<pre class="hljs cpp"><code class="cpp">  <span class="hljs-keyword">new</span> extractTextPlugin(<span class="hljs-string">"css/index.css"</span>)  <span class="hljs-comment">//这里的/css/index.css 是分离后的路径</span>
+</code></pre>
+<p>14.3现在还需要修改一下配置里面css的loader的配置</p>
+<pre class="hljs javascript"><code class="javascript">  {
+               <span class="hljs-attr">test</span>:<span class="hljs-regexp">/\.css$/</span>,
+               <span class="hljs-attr">use</span>: extractTextPlugin.extract({
+                    <span class="hljs-attr">fallback</span>: <span class="hljs-string">"style-loader"</span>,
+                    <span class="hljs-attr">use</span>: <span class="hljs-string">"css-loader"</span>
+                  }),
+                <span class="hljs-comment">// css分离后这里需要重新配置，下面就注释了</span>
+                <span class="hljs-comment">// use:[</span>
+                <span class="hljs-comment">//     {loader: "style-loader"},   </span>
+                <span class="hljs-comment">//     {loader:"css-loader"}</span>
+                <span class="hljs-comment">// ]</span>
+            },  
+</code></pre>
+<p></p>
+<p></p>
+14.4这个时候打包会报错<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 430px;">
+<div class="image-container-fill" style="padding-bottom: 55.059999999999995%;"></div>
+<div class="image-view" data-width="781" data-height="430"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-b102add0e9fdedea.png" data-original-width="781" data-original-height="430" data-original-format="image/png" data-original-filesize="123062" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+<p>是因为我们用的是webpack4.0.0以上版本<br>
+现在看下package.json文件</p>
+
+<pre class="hljs bash"><code class="bash"><span class="hljs-string">"devDependencies"</span>: {
+    <span class="hljs-string">"css-loader"</span>: <span class="hljs-string">"^0.28.11"</span>,
+   extract-text-webpack-plugin<span class="hljs-string">": "</span>^3.0.2<span class="hljs-string">",
+    "</span>file-loader<span class="hljs-string">": "</span>^1.1.11<span class="hljs-string">",
+    "</span>html-webpack-plugin<span class="hljs-string">": "</span>^3.2.0<span class="hljs-string">",
+    "</span>style-loader<span class="hljs-string">": "</span>^0.21.0<span class="hljs-string">",
+    "</span>url-loader<span class="hljs-string">": "</span>^1.0.1<span class="hljs-string">",
+    "</span>webpack<span class="hljs-string">": "</span>^4.6.0<span class="hljs-string">",
+    "</span>webpack-cli<span class="hljs-string">": "</span>^2.0.15<span class="hljs-string">"
+  }
+</span></code></pre>
+<p>解决办法：</p>
+<pre class="hljs ruby"><code class="ruby">npm install --save-dev extract-text-webpack-plugin@next 
+会下载到+ extract-text-webpack-plugin@4.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>-beta.<span class="hljs-number">0</span> 
+</code></pre>
+<p></p>
+<p></p>
+这个时候看下package.json文件<div class="image-package">
+<div class="image-container" style="max-width: 460px; max-height: 188px;">
+<div class="image-container-fill" style="padding-bottom: 40.87%;"></div>
+<div class="image-view" data-width="460" data-height="188"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-7a110e85100ea21c.png" data-original-width="460" data-original-height="188" data-original-format="image/png" data-original-filesize="34512" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div>
+<p></p>
+<p></p>
+然后在打包就正常了<div class="image-package">
+<div class="image-container" style="max-width: 654px; max-height: 563px;">
+<div class="image-container-fill" style="padding-bottom: 86.09%;"></div>
+<div class="image-view" data-width="654" data-height="563"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-df00427e5fb2a746.png" data-original-width="654" data-original-height="563" data-original-format="image/png" data-original-filesize="120624" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+<p>14.5现在配置下我们的路径问题<br>
+publicPath：是在webpack.dev.config.js文件的output选项中，主要作用就是处理静态文件路径的。<br>
+在处理前，我们在webpack.dev.config.js 上方声明一个对象，叫website。</p>
+
+<pre class="hljs javascript"><code class="javascript"><span class="hljs-keyword">var</span> website ={
+    <span class="hljs-attr">publicPath</span>:<span class="hljs-string">"http://localhost:8888/"</span>
+    <span class="hljs-comment">// publicPath:"http://192.168.1.103:8888/"</span>
+}
+
+这里的IP和端口，是你本机的ip或者是你devServer配置的IP和端口。
+</code></pre>
+<p>然后在output选项中引用这个对象的publicPath属性。</p>
+<pre class="hljs java"><code class="java"> output:{
+         <span class="hljs-comment">//打包的路径</span>
+        path:path.resolve(__dirname,<span class="hljs-string">'../dist'</span>),
+        <span class="hljs-comment">//打包的文件名称</span>
+        filename:<span class="hljs-string">'[name].js'</span>,   <span class="hljs-comment">//这里[name] 是告诉我们入口进去的文件是什么名字，打包出来也同样是什么名字</span>
+        publicPath:website.publicPath  <span class="hljs-comment">//publicPath：主要作用就是处理静态文件路径的。</span>
+    },
+
+</code></pre>
+<p></p>
+<p></p>
+配置完成后，你再使用webpack命令进行打包，你会发现原来的相对路径改为了绝对路径，这样来讲速度更快。<div class="image-package">
+<div class="image-container" style="max-width: 297px; max-height: 434px;">
+<div class="image-container-fill" style="padding-bottom: 146.13%;"></div>
+<div class="image-view" data-width="297" data-height="434"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-f6dc01796f729dc7.png" data-original-width="297" data-original-height="434" data-original-format="image/png" data-original-filesize="34858" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+<p>15、处理HTML中的图片<br>
+在webpack中是不喜欢你使用标签&lt;img&gt;来引入图片的，但是我们作前端的人特别热衷于这种写法，国人也为此开发了一个：html-withimg-loader。他可以很好的处理我们在html 中引入图片的问题，如何把图片放到指定的文件夹下</p>
+
+<pre class="hljs javascript"><code class="javascript"> <span class="hljs-comment">//图片 loader</span>
+            {
+                <span class="hljs-attr">test</span>:<span class="hljs-regexp">/\.(png|jpg|gif|jpeg)/</span>,  <span class="hljs-comment">//是匹配图片文件后缀名称</span>
+                use:[{
+                    <span class="hljs-attr">loader</span>:<span class="hljs-string">'url-loader'</span>, <span class="hljs-comment">//是指定使用的loader和loader的配置参数</span>
+                    options:{
+                        <span class="hljs-attr">limit</span>:<span class="hljs-number">500</span>,  <span class="hljs-comment">//是把小于500B的文件打成Base64的格式，写入JS</span>
+                        outputPath:<span class="hljs-string">'images/'</span>,  <span class="hljs-comment">//打包后的图片放到images文件夹下</span>
+                    }
+                }]
+            }
+</code></pre>
+<p>现在下载 <code>html-withimg-loader</code> 解决的问题就是在hmtl文件中引入&lt;img&gt;标签的问题.<br>
+首先安装</p>
+<pre class="hljs undefined"><code>npm install html-withimg-loader --save-dev
+</code></pre>
+<p>到webpack.dev.config.js中配置loader</p>
+<pre class="hljs css"><code class="css">{
+    <span class="hljs-attribute">test</span>: /\.(htm|html)$/i,
+     use:[ <span class="hljs-string">'html-withimg-loader'</span>] 
+}
+</code></pre>
+<p></p>
+<p></p>
+这个时候打包会发现已经生成了images文件夹和图片的文件<div class="image-package">
+<div class="image-container" style="max-width: 429px; max-height: 430px;">
+<div class="image-container-fill" style="padding-bottom: 100.22999999999999%;"></div>
+<div class="image-view" data-width="429" data-height="430"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-0b050e3f8716a057.png" data-original-width="429" data-original-height="430" data-original-format="image/png" data-original-filesize="46287" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+<p>16、Less文件的打包和分离<br>
+下面主要说下Less文件如何打包和分离。Less 是一门 CSS 预处理语言，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展。<br>
+首先要安装Less的服务</p>
+
+<pre class="hljs undefined"><code>npm install --save-dev less
+</code></pre>
+<p>然后再安装Less-loader用来打包使用</p>
+<pre class="hljs undefined"><code>npm install --save-dev less-loader
+</code></pre>
+<p>现在再去webpack-dev.config配置less-loader</p>
+<pre class="hljs javascript"><code class="javascript"> <span class="hljs-comment">//less loader</span>
+            {
+                <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.less$/</span>,
+                <span class="hljs-attr">use</span>: [{
+                       <span class="hljs-attr">loader</span>: <span class="hljs-string">"style-loader"</span> <span class="hljs-comment">// creates style nodes from JS strings</span>
+                    }, 
+                    {
+                        <span class="hljs-attr">loader</span>: <span class="hljs-string">"css-loader"</span> <span class="hljs-comment">// translates CSS into CommonJS</span>
+                    },
+                    {
+                        <span class="hljs-attr">loader</span>: <span class="hljs-string">"less-loader"</span> <span class="hljs-comment">// compiles Less to CSS</span>
+                    }]
+            }
+
+</code></pre>
+<p>编写一个less文件</p>
+<p>src/css/indexless.less</p>
+<pre class="hljs css"><code class="css">@<span class="hljs-keyword">base</span> :#<span class="hljs-number">000</span>;
+<span class="hljs-selector-id">#study</span>{
+    <span class="hljs-attribute">width</span>:<span class="hljs-number">300px</span>;
+    <span class="hljs-attribute">height</span>:<span class="hljs-number">300px</span>;
+    <span class="hljs-attribute">background-color</span>:@base;
+}
+</code></pre>
+<p></p>
+<p></p>
+引入到mian.js文件中<div class="image-package">
+<div class="image-container" style="max-width: 438px; max-height: 160px;">
+<div class="image-container-fill" style="padding-bottom: 36.53%;"></div>
+<div class="image-view" data-width="438" data-height="160"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-8ce1a039eda94d68.png" data-original-width="438" data-original-height="160" data-original-format="image/png" data-original-filesize="11413" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+<p>16.1把Lees文件分离。<br>
+这里和上面css文件分离基本一样，</p>
+
+<pre class="hljs javascript"><code class="javascript"> <span class="hljs-comment">//less loader</span>
+            {
+                <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.less$/</span>,
+                <span class="hljs-attr">use</span>: extractTextPlugin.extract({
+                    <span class="hljs-attr">use</span>: [{
+                        <span class="hljs-attr">loader</span>: <span class="hljs-string">"css-loader"</span>
+                    }, {
+                        <span class="hljs-attr">loader</span>: <span class="hljs-string">"less-loader"</span>
+                    }],
+                    <span class="hljs-comment">// use style-loader in development</span>
+                    fallback: <span class="hljs-string">"style-loader"</span>
+                })
+            <span class="hljs-comment">//     [{</span>
+            <span class="hljs-comment">//            loader: "style-loader" // creates style nodes from JS strings</span>
+            <span class="hljs-comment">//         }, </span>
+            <span class="hljs-comment">//         {</span>
+            <span class="hljs-comment">//             loader: "css-loader" // translates CSS into CommonJS</span>
+            <span class="hljs-comment">//         },</span>
+            <span class="hljs-comment">//         {</span>
+            <span class="hljs-comment">//             loader: "less-loader" // compiles Less to CSS</span>
+            <span class="hljs-comment">//    }]</span>
+            }
+</code></pre>
+<p></p>
+<p></p>
+配置好，打包运行后，你会发现less被分离到了index.css文件里。<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 266px;">
+<div class="image-container-fill" style="padding-bottom: 36.74%;"></div>
+<div class="image-view" data-width="724" data-height="266"><img data-original-src="//upload-images.jianshu.io/upload_images/8701263-76266f7e79d02d1a.png" data-original-width="724" data-original-height="266" data-original-format="image/png" data-original-filesize="44877" class="image-loading" style="cursor: zoom-in;"></div>
+</div>
+<div class="image-caption">image.png</div>
+</div><br>
+<p>16.2 SASS文件的打包和分离<br>
+其实sass跟less 的配置很像，这里sass首先要安装两个包，node-sass和sass-loader,因为sass-loader依赖于node-sass，所以需要先安装node-sass</p>
+
+<pre class="hljs undefined"><code>npm install  node-sass --save-dev 
+</code></pre>
+<p>然后下面再安装 sass-loader</p>
+<pre class="hljs undefined"><code>npm install  sass-loader --save-dev 
+</code></pre>
+<p>配置loader配置</p>
+<pre class="hljs javascript"><code class="javascript">   <span class="hljs-comment">//scss loader</span>
+           {
+               <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.scss$/</span>,
+               <span class="hljs-attr">use</span>: [{
+                   <span class="hljs-attr">loader</span>: <span class="hljs-string">"style-loader"</span> <span class="hljs-comment">// creates style nodes from JS strings</span>
+               }, {
+                   <span class="hljs-attr">loader</span>: <span class="hljs-string">"css-loader"</span> <span class="hljs-comment">// translates CSS into CommonJS</span>
+               }, {
+                   <span class="hljs-attr">loader</span>: <span class="hljs-string">"sass-loader"</span> <span class="hljs-comment">// compiles Sass to CSS</span>
+               }]
+           }
+</code></pre>
+<p>这里跟上面的less 一样，写好loader配置后，就可以编写sass文件了，但是不要忘记把sass文件引入到main.js中。</p>
+<p>16.3把SASS文件分离。<br>
+上面已经下载过了插件，这里直接用就可以了</p>
+<pre class="hljs css"><code class="css">{
+            <span class="hljs-attribute">test</span>: /\.scss$/,
+            use: extractTextPlugin.<span class="hljs-built_in">extract</span>({
+                use: [{
+                    loader: <span class="hljs-string">"css-loader"</span>
+                }, {
+                    loader: <span class="hljs-string">"sass-loader"</span>
+                }],
+                // use style-loader in development
+                fallback: <span class="hljs-string">"style-loader"</span>
+            })
+ }
+配置好以后我们 `<span class="hljs-selector-tag">npm</span> <span class="hljs-selector-tag">run</span> <span class="hljs-selector-tag">build</span>` 就可以看到了<span class="hljs-selector-tag">dist</span>下面的<span class="hljs-selector-tag">index</span><span class="hljs-selector-class">.css</span>中有了<span class="hljs-selector-tag">indexsass</span><span class="hljs-selector-class">.scss</span>中写的被解析的代码
+</code></pre>
+<p>16.4 自动处理CSS3属性前缀<br>
+首先需要安装两个包postcss-loader 和autoprefixer（自动添加前缀的插件）</p>
+<pre class="hljs undefined"><code>npm install --save-dev postcss-loader autoprefixer
+</code></pre>
+<p>postCSS推荐在项目根目录（和webpack.config.js同级），建立一个postcss.config.js文件。【注意⚠️：一定呀建在根目录下，不然会报错】</p>
+<pre class="hljs java"><code class="java"><span class="hljs-keyword">module</span>.<span class="hljs-keyword">exports</span>={
+   plugins: [
+       require(<span class="hljs-string">'autoprefixer'</span>) <span class="hljs-comment">//自动添加前缀插件</span>
+   ]
+}
+</code></pre>
+<p>在webpack.dev.cnfig.js中配置</p>
+<pre class="hljs css"><code class="css">  {
+       <span class="hljs-attribute">test</span>:/\.css$/,
+       use: extractTextPlugin.<span class="hljs-built_in">extract</span>({
+              fallback: <span class="hljs-string">"style-loader"</span>,
+             use:[{loader:<span class="hljs-string">"css-loader"</span>},
+                        {
+                            loader:<span class="hljs-string">"postcss-loader"</span>,
+                        },
+                        ]
+                  })
+            },  
+</code></pre>
+<p>现在在index.css中写一些代码不带前缀的，命令打包后在看下，这个时候已经自动为我们加上了前缀。</p>
+<p>17、消除未使用的CSS<br>
+使用PurifyCSS可以大大减少CSS冗余，比如我们经常使用的BootStrap(140KB)就可以减少到只有35KB大小。这在实际开发当中是非常有用的。</p>
+<p>安装PurifyCSS-webpack<br>
+PurifyCSS-webpack要依赖于purify-css这个包，所以两个都要下载</p>
+<pre class="hljs undefined"><code> npm install purifycss-webpack purify-css --save-dev
+</code></pre>
+<p>因为我们需要同步检查html模板，所以我们需要引入node的glob对象使用。在webpack.dev.config.js文件头部引入glob</p>
+<pre class="hljs javascript"><code class="javascript"><span class="hljs-keyword">const</span> glob = <span class="hljs-built_in">require</span>(<span class="hljs-string">'glob'</span>);
+</code></pre>
+<p>同样在webpack.dev.config.js文件头部引入purifycss-webpack</p>
+<pre class="hljs javascript"><code class="javascript"><span class="hljs-keyword">const</span> PurifyCSSPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">"purifycss-webpack"</span>);
+</code></pre>
+<p>然后在webpack.dev.config.js中配置 plugins</p>
+<pre class="hljs java"><code class="java"><span class="hljs-keyword">new</span> PurifyCSSPlugin({ 
+          <span class="hljs-comment">//这里配置了一个paths，主要是需找html模板，purifycss根据这个配置会遍历你的文件，查找哪些css被使用了。</span>
+          paths: glob.sync(path.join(__dirname, <span class="hljs-string">'src/*.html'</span>)),
+          }),
+
+</code></pre>
+<p>注意： 使用这个插件必须配合extract-text-webpack-plugin这个插件<br>
+18、给webpack增加babel支持<br>
+Babel的安装与配置</p>
+<pre class="hljs undefined"><code>npm install --save-dev babel-core babel-loader babel-preset-es2015 babel-preset-react
+</code></pre>
+<p>在webpack.dev.config.js中配置Babel的方法如下：</p>
+<pre class="hljs javascript"><code class="javascript"><span class="hljs-comment">//babel 配置</span>
+           {
+               <span class="hljs-attr">test</span>:<span class="hljs-regexp">/\.(jsx|js)$/</span>,
+               <span class="hljs-attr">use</span>:{
+                   <span class="hljs-attr">loader</span>:<span class="hljs-string">'babel-loader'</span>,
+                   <span class="hljs-attr">options</span>:{
+                       <span class="hljs-attr">presets</span>:[
+                           <span class="hljs-string">"es2015"</span>,<span class="hljs-string">"react"</span>
+                       ]
+                   }
+               },
+               <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span>
+           }
+</code></pre>
+<p>然后在main.js中用es6语法写一些代码，然后打包就可以看见打包成功了</p>
+<p>18.1、.babelrc配置<br>
+虽然Babel可以直接在webpack.config.js中进行配置，但是考虑到babel具有非常多的配置选项，如果卸载webapck.config.js中会非常的雍长不可阅读，所以我们经常把配置卸载.babelrc文件里。<br>
+在项目根目录新建.babelrc文件，并把配置写到文件里。</p>
+<p>.babelrc文件下</p>
+<pre class="hljs json"><code class="json">{
+    <span class="hljs-attr">"presets"</span>:[<span class="hljs-string">"react"</span>,<span class="hljs-string">"es2015"</span>]
+}
+</code></pre>
+<p>这时候.webpack.dev.config.js里的loader配置</p>
+<pre class="hljs javascript"><code class="javascript"><span class="hljs-comment">//babel 配置</span>
+           {
+               <span class="hljs-attr">test</span>:<span class="hljs-regexp">/\.(jsx|js)$/</span>,
+               <span class="hljs-attr">use</span>:{
+                   <span class="hljs-attr">loader</span>:<span class="hljs-string">'babel-loader'</span>,
+               },
+               <span class="hljs-attr">exclude</span>:<span class="hljs-regexp">/node_modules/</span>
+           }
+</code></pre>
+<p>18.3、  ENV：<br>
+现在网络上已经不流行babel-preset-es2015，现在官方推荐使用的是babel-preset-env,那我们为了紧跟潮流，我们在讲一下env的配置方法。<br>
+首先需要下载：</p>
+<pre class="hljs undefined"><code>npm install --save-dev babel-preset-env
+</code></pre>
+<p>然后修改.babelrc里的配置文件。其实只要把之前的es2015换成env就可以了。</p>
+<pre class="hljs json"><code class="json">{
+    <span class="hljs-attr">"presets"</span>:[<span class="hljs-string">"react"</span>,<span class="hljs-string">"env"</span>]
+}
+</code></pre>
+
+          </div>
+        </div>
+    </div>
+
+    <!-- 如果是付费文章，未购买，则显示购买按钮 -->
+
+    <!-- 连载目录项 -->
+
+    <!-- 如果是付费文章 -->
+      <!-- 如果是付费连载，已购买，且作者允许赞赏，则显示付费信息和赞赏 -->
+        <div id="free-reward-panel" class="support-author"><p>谢谢你的点赞</p> <div class="btn btn-pay">赞赏支持</div> <div class="supporter"><ul class="support-list"><li><a target="_blank" href="https://www.jianshu.com/u/1615f1d85753" class="avatar"><img src="./webpack4.x入门配置 - 简书_files/b6212766-8115-482a-8b09-56eb4b588d9b"></a></li></ul> <!----></div> <!----> <!----></div>
+
+      <div class="show-foot">
+        <a class="notebook" href="https://www.jianshu.com/nb/18154179">
+          <i class="iconfont ic-search-notebook"></i>
+          <span>web前端</span>
+</a>        <div class="copyright" data-toggle="tooltip" data-html="true" data-original-title="转载请联系作者获得授权，并标注“简书作者”。">
+          © 著作权归作者所有
+        </div>
+        <div class="modal-wrap" data-report-note="">
+          <a id="report-modal">举报文章</a>
+        </div>
+      </div>
+
+      <!-- 文章底部作者信息 -->
+        <div class="follow-detail">
+          <div class="info">
+            <a class="avatar" href="https://www.jianshu.com/u/0317103726b7">
+              <img src="./webpack4.x入门配置 - 简书_files/76613eae-714c-4af7-be18-f8656198b8b0" alt="96">
+</a>            <a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
+            <a class="title" href="https://www.jianshu.com/u/0317103726b7">素时年锦</a>
+              <i class="iconfont ic-man"></i>
+          <p>写了 7971 字，被 57 人关注，获得了 94 个喜欢</p></div>
+            <div class="signature">菜鸟</div>
+        </div>
+
+    <div class="meta-bottom">
+      <div data-v-6ddd02c6="" class="like"><div data-v-6ddd02c6="" class="btn like-group"><div data-v-6ddd02c6="" class="btn-like"><a data-v-6ddd02c6="">喜欢</a></div> <div data-v-6ddd02c6="" class="modal-wrap"><a data-v-6ddd02c6="">84</a></div></div> <!----></div>
+      <div class="share-group">
+        <a class="share-circle" data-action="weixin-share" data-toggle="tooltip" data-original-title="分享到微信">
+          <i class="iconfont ic-wechat"></i>
+        </a>
+        <a class="share-circle" data-action="weibo-share" data-toggle="tooltip" href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f=&#39;http://v.t.sina.com.cn/share/share.php?appkey=1881139527&#39;,u=z||d.location,p=[&#39;&amp;url=&#39;,e(u),&#39;&amp;title=&#39;,e(t||d.title),&#39;&amp;source=&#39;,e(r),&#39;&amp;sourceUrl=&#39;,e(l),&#39;&amp;content=&#39;,c||&#39;gb2312&#39;,&#39;&amp;pic=&#39;,e(p||&#39;&#39;)].join(&#39;&#39;);function%20a(){if(!window.open([f,p].join(&#39;&#39;),&#39;mb&#39;,[&#39;toolbar=0,status=0,resizable=1,width=440,height=430,left=&#39;,(s.width-440)/2,&#39;,top=&#39;,(s.height-430)/2].join(&#39;&#39;)))u.href=[f,p].join(&#39;&#39;);};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,&#39;&#39;,&#39;&#39;,&#39;&#39;, &#39;推荐 @余波z 的文章《webpack4.x入门配置》（ 分享自 @简书 ）&#39;,&#39;https://www.jianshu.com/p/6712e4e4b8fe?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weibo&#39;,&#39;页面编码gb2312|utf-8默认gb2312&#39;));" data-original-title="分享到微博">
+          <i class="iconfont ic-weibo"></i>
+        </a>
+        <a class="share-circle" data-toggle="tooltip" id="longshare" target="_blank" data-original-title="" title="">
+            <div class="qrcode" id="qrcode">
+             <img src="./webpack4.x入门配置 - 简书_files/download-index-side-qrcode-cb13fc9106a478795f8d10f9f632fccf.png" alt="Download index side qrcode">
+             <p>下载app生成长微博图片</p>
+             </div>
+          <i class="iconfont ic-picture"></i>
+        </a>
+        <a class="share-circle more-share" tabindex="0" data-toggle="popover" data-placement="top" data-html="true" data-trigger="focus" href="javascript:void(0);" data-content="
+          &lt;ul class=&quot;share-list&quot;&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=&#39;+e(&#39;https://www.jianshu.com/p/6712e4e4b8fe?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=qzone&#39;)+&#39;&amp;title=&#39;+e(&#39;推荐 素时年锦 的文章《webpack4.x入门配置》&#39;),x=function(){if(!window.open(r,&#39;qzone&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-zone&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到QQ空间&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://twitter.com/share?url=&#39;+e(&#39;https://www.jianshu.com/p/6712e4e4b8fe?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=twitter&#39;)+&#39;&amp;text=&#39;+e(&#39;推荐 素时年锦 的文章《webpack4.x入门配置》（ 分享自 @jianshucom ）&#39;)+&#39;&amp;related=&#39;+e(&#39;jianshucom&#39;),x=function(){if(!window.open(r,&#39;twitter&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-twitter&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Twitter&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://www.facebook.com/dialog/share?app_id=483126645039390&amp;display=popup&amp;href=https://www.jianshu.com/p/6712e4e4b8fe?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=facebook&#39;,x=function(){if(!window.open(r,&#39;facebook&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-facebook&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Facebook&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://plus.google.com/share?url=&#39;+e(&#39;https://www.jianshu.com/p/6712e4e4b8fe?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=google_plus&#39;),x=function(){if(!window.open(r,&#39;google_plus&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-google&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Google+&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:&#39;&#39;,r=&#39;http://www.douban.com/recommend/?url=&#39;+e(&#39;https://www.jianshu.com/p/6712e4e4b8fe?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=douban&#39;)+&#39;&amp;title=&#39;+e(&#39;webpack4.x入门配置&#39;)+&#39;&amp;sel=&#39;+e(s)+&#39;&amp;v=1&#39;,x=function(){if(!window.open(r,&#39;douban&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r+&#39;&amp;r=1&#39;};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-douban&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到豆瓣&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        " data-original-title="" title="">更多分享</a>
+      </div>
+    </div>
+      <a id="web-note-ad-1" target="_blank" href="https://www.jianshu.com/apps/redirect?utm_source=note-bottom-click"><img src="./webpack4.x入门配置 - 简书_files/web-note-ad-1-c2e1746859dbf03abe49248893c9bea4.png" alt="Web note ad 1"></a>
+    <div id="vue_comment"></div>
+  </div>
+
+  <div class="side-tool"><ul><li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="回到顶部" style=""><a class="function-button"><i class="iconfont ic-backtop"></i></a></li> <!----> <!----> <!----> <li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="分享文章" id="share"><a tabindex="0" role="button" data-toggle="popover" data-placement="left" data-html="true" data-trigger="focus" href="javascript:void(0);" data-content="&lt;ul class=&#39;share-list&#39; style=&quot;width:220px&quot;&gt;
+                  &lt;li&gt;&lt;a class=&quot;weixin-share&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-weixin&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到微信&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f=&#39;http://v.t.sina.com.cn/share/share.php?appkey=1881139527&#39;,u=z||d.location,p=[&#39;&amp;url=&#39;,e(u),&#39;&amp;title=&#39;,e(t||d.title),&#39;&amp;source=&#39;,e(r),&#39;&amp;sourceUrl=&#39;,e(l),&#39;&amp;content=&#39;,c||&#39;gb2312&#39;,&#39;&amp;pic=&#39;,e(p||&#39;&#39;)].join(&#39;&#39;);function%20a(){if(!window.open([f,p].join(&#39;&#39;),&#39;mb&#39;,[&#39;toolbar=0,status=0,resizable=1,width=440,height=430,left=&#39;,(s.width-440)/2,&#39;,top=&#39;,(s.height-430)/2].join(&#39;&#39;)))u.href=[f,p].join(&#39;&#39;);};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,&#39;&#39;,&#39;&#39;,&#39;&#39;, &#39;推荐 @余波z 的文章《webpack4.x入门配置》（ 分享自 @简书 ）&#39;,&#39;https://www.jianshu.com/p/6712e4e4b8fe?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weibo&#39;,&#39;页面编码gb2312|utf-8默认gb2312&#39;));&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-weibo&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到微博&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                  
+                  &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=&#39;+e(&#39;https://www.jianshu.com/p/6712e4e4b8fe?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=qzone&#39;)+&#39;&amp;title=&#39;+e(&#39;推荐 素时年锦 的文章《webpack4.x入门配置》&#39;),x=function(){if(!window.open(r,&#39;qzone&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-zone&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到QQ空间&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://twitter.com/share?url=&#39;+e(&#39;https://www.jianshu.com/p/6712e4e4b8fe?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=twitter&#39;)+&#39;&amp;text=&#39;+e(&#39;推荐 素时年锦 的文章《webpack4.x入门配置》（ 分享自 @jianshucom ）&#39;)+&#39;&amp;related=&#39;+e(&#39;jianshucom&#39;),x=function(){if(!window.open(r,&#39;twitter&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-twitter&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到Twitter&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://www.facebook.com/dialog/share?app_id=483126645039390&amp;display=popup&amp;href=https://www.jianshu.com/p/6712e4e4b8fe?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=facebook&#39;,x=function(){if(!window.open(r,&#39;facebook&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-facebook&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到Facebook&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://plus.google.com/share?url=&#39;+e(&#39;https://www.jianshu.com/p/6712e4e4b8fe?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=google_plus&#39;),x=function(){if(!window.open(r,&#39;google_plus&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-google&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到Google+&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:&#39;&#39;,r=&#39;http://www.douban.com/recommend/?url=&#39;+e(&#39;https://www.jianshu.com/p/6712e4e4b8fe?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=douban&#39;)+&#39;&amp;title=&#39;+e(&#39;webpack4.x入门配置&#39;)+&#39;&amp;sel=&#39;+e(s)+&#39;&amp;v=1&#39;,x=function(){if(!window.open(r,&#39;douban&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r+&#39;&amp;r=1&#39;};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-douban&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到豆瓣&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;" data-original-title="" title="" class="function-button"><i class="iconfont ic-share"></i></a> <!----></li> <!----></ul></div>
+</div>
+<div class="note-bottom">
+  <div><div class="main"><div class="title">被以下专题收入，发现更多相似内容</div> <!----> <div class="include-collection"><!----> <a href="https://www.jianshu.com/c/b5195988f8e4?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./webpack4.x入门配置 - 简书_files/1466905745.jpg"><div class="name">webpack学习</div></a><a href="https://www.jianshu.com/c/NEt52a?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./webpack4.x入门配置 - 简书_files/computer_guy.jpg"><div class="name">程序员</div></a><a href="https://www.jianshu.com/c/9b8640a2c2a9?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./webpack4.x入门配置 - 简书_files/000.jpg"><div class="name">前端打包</div></a><a href="https://www.jianshu.com/c/fcd57fd8e09b?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./webpack4.x入门配置 - 简书_files/logo.png"><div class="name">webpack</div></a><a href="https://www.jianshu.com/c/5722a3060864?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./webpack4.x入门配置 - 简书_files/webpack.jpg"><div class="name">webpack</div></a><a href="https://www.jianshu.com/c/31d2fff485b1?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./webpack4.x入门配置 - 简书_files/e805a08a1547444b929b4a880543c046.png"><div class="name">webpack</div></a><a href="https://www.jianshu.com/c/d505eb52873f?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./webpack4.x入门配置 - 简书_files/1534455684.jpg"><div class="name">Vue</div></a> <a class="show-more">
+        展开更多
+        <i class="iconfont ic-show"></i></a></div></div> <!----> <!----></div>
+  <div data-vcomp="recommended-notes" data-note-id="26556401"></div>
+  <!-- 相关文章 -->
+  <div class="seo-recommended-notes">
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="https://www.jianshu.com/p/8ff8e71dcbc6?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="./webpack4.x入门配置 - 简书_files/5125911-c12cde4b755a83a0" alt="240">
+</a>          <a class="title" target="_blank" href="https://www.jianshu.com/p/8ff8e71dcbc6?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">webpack介绍、配置、使用</a>
+          <p class="description">版权声明：本文为博主原创文章，未经博主允许不得转载。 webpack介绍和使用 一、webpack介绍 1、由来 由于前端之前js、css、图片文件需要单独进行压缩和打包，这样团队人员处理很繁琐，然后 Instagram 团队就想让这些工作自动化，然后webpack应运而生...</p>
+          <a class="author" target="_blank" href="https://www.jianshu.com/u/aa48d40aebef?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="./webpack4.x入门配置 - 简书_files/ec34c0dc-e35a-4e78-89bd-5f3803d633fc.jpg" alt="48">
+            </div>
+            <span class="name">it筱竹</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="https://www.jianshu.com/p/9349c30a6b3e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">webpack 从入门到工程实践</a>
+          <p class="description">GitChat技术杂谈 前言 本文较长，为了节省你的阅读时间，在文前列写作思路如下： 什么是 webpack，它要解决的是什么问题？ 对webpack的主要配置项进行分析，虽然不会涉及太多细节，但是期待在本节能让我们知晓如果我们有什么需求，我们该从哪些配置项着手修改？ 分析...</p>
+          <a class="author" target="_blank" href="https://www.jianshu.com/u/654b04d75afb?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="./webpack4.x入门配置 - 简书_files/5164ea02-ea5b-40a8-ab2d-72d4acbb6e89.jpg" alt="48">
+            </div>
+            <span class="name">萧玄辞</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="https://www.jianshu.com/p/d074301c1bfa?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">无标题文章</a>
+          <p class="description">从V1迁移到V2由于使用的是webpack版本是2.2.1，所以针对原文做了一些修改。针对webpack2的修改部分和添加的部分在最底部，文中已经改过来了。 写在前面的话阅读本文之前，先看下面这个webpack的配置文件，如果每一项你都懂，那本文能带给你的收获也许就比较有限...</p>
+          <a class="author" target="_blank" href="https://www.jianshu.com/u/304734d3ba47?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="./webpack4.x入门配置 - 简书_files/92166065-0a48-43ff-b548-809a78292518.jpg" alt="48">
+            </div>
+            <span class="name">yzc123446</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="https://www.jianshu.com/p/fcc97f0fa535?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">Gulp和Webpack的差异</a>
+          <p class="description">   在现在的前端开发中，前后端分离、模块化开发、版本控制、文件合并与压缩、mock数据等等一些原本后端的思想开始逐渐渗透到“大前端”的开发中。前端开发过程越来越繁琐，当今越来越多的网站已经从网页模式进化到了 Webapp 模式。它们运行在现代的高级浏览器里，使用 HTML...</p>
+          <a class="author" target="_blank" href="https://www.jianshu.com/u/21f7c82df048?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="./webpack4.x入门配置 - 简书_files/4-3397163ecdb3855a0a4139c34a695885.jpg" alt="48">
+            </div>
+            <span class="name">Charlot</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="https://www.jianshu.com/p/539f069265bd?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">工程化起步（二）：webpack</a>
+          <p class="description">一、webpack的基本概念 webpack 本质上是一个打包工具，它会根据代码的内容解析模块依赖，帮助我们把多个模块的代码打包。借用 webpack 官网的图片： 如上图，webpack 会把我们项目中使用到的多个代码模块（可以是不同文件类型），打包构建成项目运行仅需要的...</p>
+          <a class="author" target="_blank" href="https://www.jianshu.com/u/3f816d9e5189?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="./webpack4.x入门配置 - 简书_files/42858043b94f.JPG" alt="48">
+            </div>
+            <span class="name">cilla123</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="https://www.jianshu.com/p/10805bf18544?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="./webpack4.x入门配置 - 简书_files/4221038-c57333002764ff43.jpg" alt="240">
+</a>          <a class="title" target="_blank" href="https://www.jianshu.com/p/10805bf18544?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">七月坚持勋章申请</a>
+          <p class="description">0701与牛人交友 0702关键对话，成为沟通高手 0703你以为这就是事实吗？ 0704理性与感性 0705个人成长三部曲 0706用行为破解性格密码 0707boss的内心独白 0708从0到1 0709高质量的睡眠 0710你有多大的欲望，你就能对自己多狠 0711高...</p>
+          <a class="author" target="_blank" href="https://www.jianshu.com/u/a9182875fce0?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="./webpack4.x入门配置 - 简书_files/b0d9ff01-6a0c-420d-97f7-c6cc560a5cd0.jpg" alt="48">
+            </div>
+            <span class="name">静心默行</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="https://www.jianshu.com/p/bf6304dfb1ed?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="./webpack4.x入门配置 - 简书_files/2796404-23b97ad3468b5367.jpg" alt="240">
+</a>          <a class="title" target="_blank" href="https://www.jianshu.com/p/bf6304dfb1ed?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">永远的木棉花</a>
+          <p class="description">文/ 陈皓    在没到北海之前，真正的木棉花我也没有见过。今年二月份去北海，有幸看到了正在绽放的、红似焰火的木棉花。在哪儿，让我久久驻足树下，像瞻仰英雄一样，仰慕、赞叹、回想……在我心目中它就是开的最美丽、最鲜艳、最高洁的花。    到达北海的第二天，在司哥、周姨、张总的...</p>
+          <a class="author" target="_blank" href="https://www.jianshu.com/u/a06e2c5f7ca3?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="./webpack4.x入门配置 - 简书_files/8b66e7f342f0" alt="48">
+            </div>
+            <span class="name">沂蒙文学</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="https://www.jianshu.com/p/e60f2ae1d0f6?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="./webpack4.x入门配置 - 简书_files/3409391-3fb332bab173aae5.jpg" alt="240">
+</a>          <a class="title" target="_blank" href="https://www.jianshu.com/p/e60f2ae1d0f6?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">终其一生，成为一个体面的普通人</a>
+          <p class="description">看到了一个小妹妹在公交玩植物大战僵尸，把坚果放到最后面，然后在前面放炮手。我强忍住笑问她为什么？她说那个坚果样子笨笨傻傻的，所以我要保护他。突然想想，看似成熟的我们，其实丢掉了很多很多。 7年前，赵雷参加《快乐男声》，也是在长沙，然后转战广州，止步全国12强。那时候，他唱了...</p>
+          <a class="author" target="_blank" href="https://www.jianshu.com/u/f98f38d808cb?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="./webpack4.x入门配置 - 简书_files/332a81d52f9f" alt="48">
+            </div>
+            <span class="name">柒木流言</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="https://www.jianshu.com/p/8ca8d995c9bb?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">一级建造师复习建议</a>
+          <p class="description">本文整理自网络 建造师是个什么样性质的考试？ 第一、就考试本身而言，它是一个文科性质的考试，主要的学习方法就是靠记忆。第二、注册类考试都是过关类考试。所以我们复习的重点就是抓重点放难点。 怎么进行有效的记忆? 1、 缩短单科复习周期第一是效率，第二是持续性，第三才是所谓的大...</p>
+          <a class="author" target="_blank" href="https://www.jianshu.com/u/77ffd5564727?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="./webpack4.x入门配置 - 简书_files/a03951e78860" alt="48">
+            </div>
+            <span class="name">粉蓝</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="https://www.jianshu.com/p/f73140fd0a84?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">你鞋子接触过的地面</a>
+          <p class="description">朋友从外地来我所在的城市发展，我知道消息的时候，她已经坐在了一家小饭馆里等我。我责怪她不早告诉我，好让我去接站，帮她拿东西。她笑着说不想给我添麻烦。我问她：“还没住的地方吧？等会我陪你去找房子。”“不用了，来之前我已经在网上查了这附近的一些信息，吃完饭我自己去就行，这样我也...</p>
+          <a class="author" target="_blank" href="https://www.jianshu.com/u/952c2ee55d90?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="./webpack4.x入门配置 - 简书_files/666b1fb047e6.jpg" alt="48">
+            </div>
+            <span class="name">心情故事</span>
+</a>        </div>
+  </div>
+</div>
+
+    <script type="application/json" data-name="page-data">{"user_signed_in":false,"locale":"zh-CN","os":"windows","read_mode":"day","read_font":"font2","note_show":{"is_author":false,"is_following_author":false,"is_liked_note":false,"follow_state":0,"uuid":"0e8bc803-5c70-4675-aada-dd314bd85246"},"note":{"id":26556401,"slug":"6712e4e4b8fe","user_id":8701263,"notebook_id":18154179,"commentable":true,"likes_count":84,"views_count":20161,"public_wordage":2398,"comments_count":47,"featured_comments_count":2,"total_rewards_count":1,"is_author":false,"paid_type":"free","paid":false,"paid_content_accessible":false,"author":{"nickname":"素时年锦","total_wordage":7971,"followers_count":57,"total_likes_count":94}}}</script>
+    
+    <script src="./webpack4.x入门配置 - 简书_files/babel-polyfill-6cd2d6b53fe3184b71cc.js.下载" crossorigin="anonymous"></script>
+    <script src="./webpack4.x入门配置 - 简书_files/web-base-5125e454d77fbccef1b4.js.下载" crossorigin="anonymous"></script>
+<script src="./webpack4.x入门配置 - 简书_files/web-0a0abf264480fcd2ef7f.js.下载" crossorigin="anonymous"></script>
+    
+    <script src="./webpack4.x入门配置 - 简书_files/entry-429c4cb17e5e3fb38b55.js.下载" crossorigin="anonymous"></script>
+    <script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+  
+
+<!----><!----></body></html>

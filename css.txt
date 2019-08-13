@@ -1,0 +1,489 @@
+<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+
+
+--------------------------------------------------------------------------------------------------------------
+html
+
+文本垂直对齐方式(仅限于表格/单元格,普通div和span里无效)
+vertical-align: super/sub(上下标对齐);
+vertical-align: top/middle/bottom(上中下对齐);
+例:设置middle是没有效果的。只有设置正/负才可以调整span的上下居中.
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+	
+	.txt{
+		width: 100px;
+		height: 200px;
+		background-color: silver;
+		text-align: center;		
+	}
+	span{
+		vertical-align:middle/-200%/+200%/-100px/100px;
+	}
+	
+	</style>
+</head>
+<body>
+	<div class="txt">
+		<span>hello</span>
+	</div>
+	<span>title</span>
+	<textarea rows="10"></textarea>
+</body>
+</html>
+
+
+a:(anchor锚点,记录位置,后来发展为超链接)
+target:_blank(新标签或新窗口中打开)
+1.超链接:
+2.页面内跳转:锚点,利用#(id)指定
+3.打电话: href="tel:13707735481",移动端使用非常广泛
+4.发邮件:href="mailto:glpla@126.com"
+5.协议限定符:执行脚本,如href="javascript:alert('hi')"
+6.在head区加上:<base target="_blank">,指定默认打开方式.适合大量的a标签.
+
+Html中添加注释:ctrl+?
+备注/调试(重要手段)
+可先添加注释符号,再添加注释内容
+也可以先添加注释内容,再添加注释符号(将当前行转化为注释)
+也可以先选择一行或多行,再ctrl+?,转化为注释
+--------------------------------------------------------------------------------------------------------------
+css
+
+快捷生成完整标签:
+先打标签名字,按TAB键自动补全标签的完整形式:
+打div,按tab,直接生成<div></div>,且光标位于标签中间
+
+带类
+打div.box,按tab,直接生成<div class="box"></div>,且光标位于标签中间
+
+带id
+打div#box,按tab,直接生成<div id="box"></div>,且光标位于标签中间
+
+//带儿子?????
+//打div>p,按tab,直接生成<div><p></p></div>,且光标位于标签中间
+//复合形式
+//打div#box,按tab,直接生成<div id="box"></div>,且光标位于标签中间
+//上述这二种需要插件支持
+
+计算机中的异步相当于现实中的同步,而计算机的同步则相当于现实的异步.
+calc():中间的计算机单元要用空格搁开
+calc(100px-20px);//No.会被当作一个整体的字符串
+calc(100px - 20px);//Yes.
+var出来的变量是全局的,属于window的
+变量声明请忘记var,请使用let.可以有效避免闭包函数;
+常量必须声明的时候同时赋值,不允许先声明后赋值;
+同一个作用域不能重复定义或者声明;
+
+
+
+example:div屏幕居中
+div{
+	position: fixed;/*相对于视窗或者浏览器固定不变*/
+	left: 50%;
+	top: 50%;
+	width: 100px;
+	height: 100px;
+	margin-left: -50px;/*左移半个神位*/
+	margin-top: -50px;/*上移半个神位*/
+}
+注意:相对于文档固定不变则采用ablolute定位,文档一般会超过视窗或者浏览器的高度.
+
+bfc:block format context用于解决父级margin塌陷
+正常情况下,子级元素的margin是相对于父级元素的.但是如下列html,左右方向上没有问题,垂直方向上,子级元素的margin出现了bug.
+如果子级的margin小于父级的margin,则没有效果;
+如果子级的margin大于父级的margin,则子级会带着父级一起;
+解决方案:在父亲定义overflow:hidden;/display:inline-block;/position:ablolute;
+3个任选一种方法.
+
+html:
+<div class="outBox">
+		<div class="innerBox"></div>
+	</div>
+
+css:
+.outBox{
+		width: 100px;
+		height: 100px;
+		background-color: #023;
+		margin-left: 50px;
+		margin-top: 50px;
+		/*overflow: hidden;*/
+		/*display: inline-block;*/
+		/*position: absolute;*/
+	}
+	.innerBox{
+		width: 50px;
+		height: 50px;
+		background-color: #f03;
+		margin-left: 50px;
+		margin-top: 50px;
+	}
+
+--------------------------------------------------------------------------------------------------------------
+javascript
+
+
+siblings():选中同级的所有元素,当然也包括自己
+
+
+解释性、单线程
+变量声明标准模式：分行+空格
+var 	a = 1,
+	b = 2,
+	c = "str",
+	d = "hell0, world,
+	f;
+
+注意:如果不使用var,则默认是全局变量.
+任何时候,我们都可以访问到全局变量;
+但是,一般情况下,我们访问不到函数内部声明的局部变量(必须使用var来声明).这就是数据的封装.
+为了实现访问函数内部的局部变量,可以采用封包.就是在函数内部再定义一个函数,将父级函数的局部变量获取到外部.
+
+原始值：(stack栈)(先进后出First In Last Out)(赋值是拷贝操作)
+Number		整型, 浮点型
+Boolean		true, false(null NaN "" 0 undefined)
+String		"", ‘’
+undefined		
+null		
+
+引用值：(heap堆)(赋值是引用操作)
+Array Object function date RegExp ...
+如：
+var a1=[1,2];
+var a2=a1;	//a1 和 a2的指向都是[1,2]。
+a1.push(3);	//修改原来指向的数据，会同步影响到a2。
+document.write(a2);//[1,2,3]因为他们都指向同一个储存区域
+a1=[1,3];		//a1重新被赋值，则a1的引用会指向新的值，不是在原来的指向数据中修改。
+document.write(a2);//[1,2]（因为赋值是重新申请储存区域，不是对老区域的重复使用）所以a2还是指向原来的值。
+
+原始值是不可以改变的
+对原始值的重新赋值，并不是把原来数值直接改掉，
+而是重新申请了一个存储，放置新赋予的数值。
+原来的数值还在。只不过同原来的指向断开了，现在指向新的存储
+
+所以本质上来说，原始值和引用值的赋值都是对存储的重新申请。（好好思考）
+
+js语句以分号结束，但是function/for/if这些语句后面不需要加分号。
+
+&&:
+运算过程：先看第1个表达式转化为布尔值后的值是否为真：
+如果为真，则返回第2个表达式的值，并继续往后执行
+如果为假，则返回第1个表达式的值，结束语句，不再往后执行
+返回的是表达式的值，不是真true或假false。
+判断表达式的真假，只是决定语句是否要继续执行下去
+
+var a = 1 && 2;//返回2
+var a = 1 && false && 1;//返回false
+var a1 = 1 + 1 && 1 - 1;//返回0。因为+的优先级大于&&，故表达式为：var a1=2&&1-1=1-1=0;
+
+可以当作if语句使用（短路效果），如：
+data && function_name(data);//判断传过来的data是否存在（真），如果不存在，则不执行后面的自定义函数。避免系统崩溃。
+
+||：
+运算过程：如果前面为真，就停。碰到假就继续执行。（||碰真，停，返，&&碰假，停，返）
+
+
+
+
+
+
+
+事件
+添加事件基本框架:(1和2可以放弃了)
+冒泡事件:从内到外
+捕获事件:从外到内
+
+IE:一开始就存在的
+标准DOM:事件检测到的时候才会触发创建
+
+1.事件源元素(element).事件类型(一般以on开始)=事件处理函数(function)
+
+2.IE事件监听方法(默认都是冒泡事件)
+对象.attachEvent/detachEvent(事件类型(一般以on开始),处理函数);
+
+3.标准BOM事件监听方法
+对象.addEventListener/象.removeEventListener(事件类型(无on),处理函数,冒泡事件false或捕获事件true);
+
+早期,事件函数可以绑定HTML元素.即:
+1.head定义函数fn:
+<script>	function fn(){...}</script>
+2.body绑定元素:<div onclick="fn"></div>
+但是由于分别写在html和script,修改时要改动2个地方的代码.没有实现三分离.
+现在事件函数都是绑定DOM对象.HTML只负责结构的工作.
+注意的是:script一般都放在HTML底部. 
+如果放在顶部,将导致很多DOM元素是空的.因为代码从上到下执行.
+你获取到的DOM元素此时还是没有和下面的HTML链接起来,页面还没有加载完毕,所以是未定义的.
+也可以把函数定义在window的加载函数中.当页面加载完毕后就执行
+先定义好各种函数,然后在window.onload里引用.
+<script>
+	function fn(){...}
+	window.onload=function(){
+		//使用预先定义好的函数
+		var oBox=document.getElementById('box').attachEvent("onclick", fn);
+	}
+</script>
+标准DOM:--------------------------------------------------------------------------
+<script>
+	function fn(){...}
+	window.onload=function(){
+		//使用预先定义好的函数
+		var oBox=document.getElementById('box').addEventListener/("click", fn,flase);
+	}
+</script>
+
+阻止元素的默认行为,如a的链接属性.
+定义并绑定一个函数,返回lfalse
+onclick="return false;"
+
+兼容型写法
+// 兼容IE的window.event.
+// 以下写法都可以
+//一般按通用写法进行兼容
+
+//IE和标准DOM获取事件源的接口也不一样
+//如下
+object.on函数=function(e){
+	// if(window.event)(e=window.event);
+	var eDown=e||window.event;
+	
+	var src;
+	if(e.srcElement){src=e.srcElement}else{src=e.target}
+}
+
+函数类型
+1.匿名函数:function (){};
+内置函数都是匿名函数,如
+元素.事件类型=function(){...};
+里面的this指的就是元素本身
+
+2.正常函数:function fn(){}
+元素.事件类型=function(){...}
+
+3.元素.事件类型=fn;
+function fn(){...}
+
+4.元素.ddEventListener(事件类型,处理函数,false/true);
+一个元素可以添加多个事件
+前面的写法只能添加一个事件
+里面的this指的也是元素本身
+
+5.元素.attachEvent('on'+事件类型,处理函数);//IE独有
+
+
+
+:拖拽
+
+
+setTimeOut(function, time)
+clearTimeOut(id)
+setInterval(para1, para2)
+clearInterval(para)
+
+4.立即执行函数
+4.1 ( function (){}() );//()在里面,建议采用-------------------------
+其形式为1对括号里放上1个匿名函数,并以另外一对括号结束.
+可以写函数名.如:
+( function fn(){}() );
+但是执行完毕立即被释放,所以函数名就无所谓了.可以省略不写(所以叫匿名函数);
+也可以带参数.第1对括号放形参,第2对括号放实参数,如:
+( function (a,b){console.log(a+b)}(1,2) );
+按照正常数据使用的方式,获取立即执行函数的结果.如:
+var num=( function (a,b){console.log(a+b);return a+b;}(1,2) );
+
+4.2 ( function (){}) ();//()在外面
+
+附注:只有表达式才能被执行符号执行.函数声明不是表达式,所以不能在函数声明后直接执行.如:
+funtion fn(){}()//后面的1对括号会导致报错
+而函数表达式就可以.如:
+var num=funtion(){}();
+
+5.函数声明和函数调用
+var arr=[];
+for(var i=0;i<10;i++){
+arr[i]=function(){	console.log(i);}
+}
+arr[0]();
+...
+arr[9]();
+//全是10;
+//因为循环只是声明了数组每个元素对应的函数,并没有立即执行.
+//所以函数声明里面的i没有任务意义
+//等到每个元素执行的时候,i已经变成了10
+//而不是123456789
+
+所以:事件出现在循环中,一定要闭包...................................
+当然如果用不到循环体的i参数,则无所谓.
+即要传递参数进去就必须要闭包.
+
+如给li数组的每个li绑定点击事件:
+for (var i = 0; i < li.length; i++) {		
+	(function(j){
+
+		li[j].addEventListener('click',function(){
+		console.log(j);
+		this.innerHTML=j;
+	},false)
+			
+	}(i))
+};
+
+
+数组
+length/push
+
+
+
+
+//-----------------------------------------------------sample
+a{
+	display: inline-block;
+	text-decoration: none;
+	color: #424242;
+	width: 120px;
+	height: 90px;
+	border: 1px solid #000;
+	background-image: url("logo.png");
+	background-size: 120px 90px;
+	text-indent: 190px;//
+	white-space: nowrap;//
+	overflow: hidden;
+}
+a{
+	display: inline-block;
+	text-decoration: none;
+	color: #424242;
+	width: 120px;
+	height: 0;//
+	padding-top:90px;//利用背景图片会在padding区域显示的特性
+	border: 1px solid #000;
+	background-image: url("logo.png");
+	background-size: 120px 90px;	
+	overflow: hidden;
+}
+
+节点类型:元素节点1/属性节点2/文本节点3/注释节点8/document9/
+节点属性:nodeName/nodeValue/nodeType(read only)/attributes
+
+createElement
+创建标签/元素/节点
+var div=document.createElement('div');//<div></div>
+添加内容
+div.innerHtml='hello, world';
+追加到html文档中
+document.body.appendChild(div);
+
+createTextNode
+创建文本节点
+var txt=document.createTextNode('glpla');//'glpla'
+
+appendChild:
+可以追加新创建的元素;
+也可以把文档中已有的元素剪切cut过来进行重新追加; 
+
+insertBefore:
+插入节点
+parent.insertBefor(a,b);
+//父级调用
+//要有3个元素
+//a是要插入的元素,b是要插入位置后的兄弟;
+
+removeChild
+删除节点
+parent.removeChild(节点)
+//父级调用,删除其中的子级元素
+
+remove(节点)
+自己彻底删除自己
+
+替换replaceChild
+parent.replaceChild(new,old);
+
+获取元素html内容
+element.innerhtml//包括文本和其他节点的结构
+设置元素属性//类,id也可以;
+element.setAttribute('name','value');
+更为简洁的是,可以不用set方法.直接修改:
+element.className='className';
+element.id='idName';
+获取元素属性
+element.getAttribute('name');
+
+example:创建简单文档树
+<script>
+	var body=document.getElementsByTagName('body')[0];//可略去
+	var div=document.createElement('div');
+	div.setAttribute('class','example');
+	var p=document.createElement('p');
+	p.setAttribute('class','slogan');
+	p.innerHTML='大树,你最帅.';
+	div.appendChild(p);
+	body.appendChild(div);//略去第一句后,这里应写完整:document.body.appendChild(div);
+</script>
+
+example:利用insertBefore创建/封装insertAfter
+<script>
+Element.prototype.insertAfter=function(n,a){
+		var b=a.nextElementSibling;
+		//获取下一个节点.如果不是最后一个(非null),则前插
+		//如果是最后一个,则为null(假),则添加.
+		//可简写为if(a).因为null代表假flase;非null就是真.
+		if(a!=null){
+			this.insertBefore(n,b);
+		}
+		else{
+			this.appendChild(n);
+		}
+	}
+	var div=document.getElementsByTagName('div')[0];
+	var i=document.getElementsByTagName('i')[0];
+	var p=document.createElement('p');
+	div.insertAfter(p,i);
+</script>
+
+sublime2
+import urllib2,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), 'wb' ).write(by) if dh == h else None; print('Error validating download (got %s instead of %s), please try manual install' % (dh, h) if dh != h else 'Please restart Sublime Text to finish installation')
+
+sublime3
+import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
+
+
+
+iNum
+sStr
+aItems
+bFlag
+fNumber
+oBox
+
+//冒泡排序
+var iTemp=0;
+var aNum=[1,23,4,55,7];
+document.write(aNum+"<br>");
+for (var i = 0; i <= aNum.length-2; i++) {
+	for (var j = i+1; j <= aNum.length-1; j++) {
+		if(aNum[i]>aNum[j]){
+			iTemp=aNum[i];
+			aNum[i]=aNum[j];
+			aNum[j]=iTemp;
+
+		}
+	}
+}
+document.write(aNum);
+
+//9*9表
+var sHtml="<table>";
+for (var i = 1; i < 10; i++) {
+	sHtml+="<tr>";
+	for (var j = 1; j <= i; j++) {
+		sHtml+="<td>"+(i+'*'+j+'='+i*j+' ')+"</td>";
+	};
+	sHtml+="</tr>";
+}
+sHtml+="</table>"
+document.write(sHtml);

@@ -1,0 +1,123 @@
+          BitmapData的名字可以拆开来看，就是Bitmap+Data，翻译成中文就是：位图数据，所以它可以看作数据储存的一种，而不是真正的显示对象，要想看到BitmapData，我们需要把Bitmapdata赋到一个Bitmap对象中，然后addChild(Bitmap),那么就能看到具体的画面了
+
+那么BitmapData的像素级操作作用在哪呢?
+比较大家喜欢津津乐道的就是粒子效果,作为一个需要大量计算的应用来说,1像素长宽的粒子无疑是能存在的最小的粒子；
+另外一个是作为数据传输,大家如果想实现上传图片或者下载图片的效果,基本的理念就是将Bitmapdata使用JPEGEncoder编码成二进制数据，把二进制发送给服务器端；
+第三种是滤镜视觉特效，例如一些水波划动特效；
+第四种是视频摄像头的视频检测；当然还有很多有趣的玩法，例如通过Bitmapdata压缩数据之类的
+
+
+二，公共属性
+
+BitmapData的公共属性很少，只有4种，而且都属于Read-Only(只读)，只读的意思就是“只能读”（好废话），所以我们可以取出BitmapData的属性来做运算，但是却不能赋值给它们，跟只读区别的就是Read-Write（读写）。
+
+有时程序有莫名其妙的问题，可以查看帮助文档，是不是因为你尝试对只读属性进行了赋值导致的。
+
+1，height
+
+就是Bitmapdata存储像素数据的高度
+
+2，width
+
+同理，就是Bitmapdata存储数据的宽度，这里扯多一句，一般保存长宽的都是Number属性，因为长宽可能存在小数点，而有些其他的属性可能是int的，把带有小数点的值赋值给int的属性的话，会自动把小数点后面的数值去掉，造成一些莫名其妙的错误，所以写代码的时候要多注意看代码提示里的属性说明。
+
+OR:是否使用32位填充位图（包括alpha)。是的话，就是AARRGGBB，在普通颜色上增加一个像素透明属性；否就是普通的RRGGBB，
+
+3，transparent
+
+是一个Boolen值，表示此Bitmapdata是否支持透明像素，一般的颜色分为16位颜色0xRRGGBB和32位颜色0xAARRGGBB。其中0x是16进制数字的意思，后面的每两位都代表着0~F，16个范围，所以每个颜色通道都有16*16=256位的数值，其中32位颜色就是多了一个AA（透明度）通道。
+
+4，rect
+
+返回BiamapData所占的矩形对象（Rectangle），你可以暂时理解为一个对象，这个对象储存了x,y,width,height等数值。
+
+
+
+
+9，draw方法，显示对象BitmapData化
+
+draw(source:IBitmapDrawable, matrix:Matrix = null, colorTransform:ColorTransform = null, blendMode:String = null, clipRect:Rectangle = null, smoothing:Boolean = false):void
+
+这里的六个参数，除了第一个是必选外，其余的都是可选：
+
+source：要被“画”的对象。
+
+matrix：一个变型矩阵，作用于BitmapData。
+
+colorTransform：一个颜色变换，作用于BitmapData。
+
+blendMode：图层叠加模式。具体的模式可以在BlendMode 类中找到。将BitmapData与source进行图层叠加。
+
+clipRect：定义了draw source的区域。
+
+smoothing：定义是否进行图像平滑。只对source是BitmapData时起作用。
+
+这个绝对是BitmapData的重头戏，非常常用的方法。画一切可以“画”的对象，就是文章开头提到的实现了IBitmapDrawable接口的对象都可被“画”。BitmapData和DisplayObject都实现了这个接口。
+
+这样做的好处是可以在显示对象不需要被使用的时候Draw一个假的放在舞台上，或者有很多元件在舞台上运动的时候，统一把结果Draw在一张BitmapData上，节省CPU的开销，实现用内存换取CPU性能。
+
+注意，如果跨域没有安全文件的话，draw方法是无法draw到内容的，不过这种情况在一般的内容里不会出现。
+
+
+
+清除BitmapData 
+
+        一个BitmapData对象实例可以很快的吃掉访问者的内存，bitmap中的每个像素都要使用内存中的4个字节来保存。如果你创建的bitmap有500*500的大小，它将消耗掉1M左右的内存，如果你不在需要一个Bitmap对象，那最好的习惯是释放Bitmap所使用的内存，BitmapData提供了一个方法，帮你处理此事，dispose()方示，你只需要如下操作：myBitmap.dispose(); 
+
+
+显示图像
+
+        一个BitmapData类的实例保存在内存中,它是不可见的直到你决定是时候让它显示时,你需要将bitmap贴加(attche)到舞台(stage)上以使它可被渲染。你可以使用方法MovieClip.attachBitmap让BitmapData对象显示在任何movieclip当中。
+        第3个参数为一个BOOL，表示图像是否允许像素透明；如果允许，则第4个参数颜色值的前2位为透明度（00为透明，FF为不透明），后6位为RRGGBB。如果不允许，则颜色值的前2位没有意义，后6位是RRGGBB。
+
+import flash.display.BitmapData;     
+myBitmap = new BitmapData(100,100,false,0xff000000);     
+this.createEmptyMovieClip(“holder_mc”,1);     
+holder_mc.attachBitmap(myBitmap,1);   
+
+      创建一个空的影片剪辑来显示bitmap是一个不错的主意，当你贴加bitmap到你的影片剪辑中时，是没有方法移除的，而如果你单独创建了一个空影片剪辑用来显示bitmap,那么你在不需要时可能通过移除movieclip来移除bitmap:
+
+holder_mc.removeMovieClip();    
+
+
+当你贴加bitmap到影片剪辑时，你对bitmapData的任何修改，影片剪辑中的bitmap都会自动的更新，你不需要每次都重新贴加。  
+
+
+变换矩阵 
+
+       在flash8中增加了一个新的Matrix ActionScript类它可以把我们从创建变换矩阵的困难中摆脱出来。一个变换矩阵是一个3行*3列的数字，它反映的是从一个位置到哪一个的点阵图。使用变换矩阵，你可以在同一时间内进斜切，旋转，缩放和移动bitmap或是movieclip.仔细讨论Matrix 类已经超出了此文的范围。这里将介绍给你Matrix 类的一些方法，以满足你的日常应用。它是draw()方法中的第二个参数。 
+ 要创建变换矩阵，需要你先导入Matrix类，matrix类存在于flash.geom类包中。
+
+import flash.geom.Matrix;   
+
+
+然后你就可以创建Matrix类实例： 
+
+m= new Matrix();   
+
+
+       这样我们就创建了一个默认单位矩阵，当指定给对象时，矩阵并没有改变对象的缩放，旋转，斜切和位置。 
+ 当你创建了一个矩阵之后，你可以使用矩阵所带的各种方法来编辑对象的属性和指定各种变换给对象。 
+      你可以使用Matrix.scale()方法来编辑矩阵，当它指定给对象时，它就会针对对象进行缩放。例如，创建一个变换矩阵它将缩放对象到它之前两倍的大的大小，使用下面的代码： 
+
+import flash.geom.Matrix;     
+m = new Matrix();     
+m.scale(2,2);    
+
+
+       如果当你在变换矩阵时你想旋转你的对象，那么你可以使用Matrix.rotate()方法。这个方法接受弧度。要将旋转角度值转换弧度你需要用到下面的简单的数学方法： 
+
+radians =(degree/180)*Math.PI;    
+
+
+下面代码编辑变换矩阵，当你将这段代码应用到对象时，它将旋转对象45度。 
+
+m.rotate((45/180)*Math.PI);    
+
+
+       要移动一个指定了矩阵的对象，你可以使用Matrix.translate()方法，当你指定给一个对象时，对象就会显示在指定位置上。 
+
+m.translate(100,100)    
+
+
+       现在你已经有了一个矩阵，当它指定给一个对象时，缩放到对象的两倍大小，旋转45度，并设定它的位置为x=100,y=100. 
