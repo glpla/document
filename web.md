@@ -400,6 +400,114 @@ bindtouchstart:按下并保持,如录音(录音管理API))
 
 bindtouchend
 
+## common js
+
+- onload拉取用户信息:首先获取用户授权信息，如未授权，则弹出授权对话框;如已授权，则获取用户信息
+
+  ```js
+  wx.getSetting({
+      success: res => {
+          if (res.authSetting['scope.userInfo']) {
+              // 已经授权，可用 getUserInfo 获取头像昵称
+              wx.getUserInfo({
+                  lang:"zh_CN",//拉取中文信息，方便
+                  success: res => {
+                      console.log(res.userInfo)
+                  }
+              })
+          }
+      }
+  })
+  ```
+
+  
+
+- 点击获取用户信息:一定要设置open-type属性和bindgetuserinfo事件.这个事件包含了用户信息(好像view也可指定这2个属性，不仅仅局限于button)
+
+  ```html
+  <button lang="zh_CN" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo"></button>
+  ```
+
+  
+
+  ```
+  onGetUserInfo: function(e) {
+      console.log(e.detail.userInfo)    
+  }
+  ```
+
+- 获取app全局数据
+
+  ```js
+  //option 1：页面page()外面定义，再在页面page()内部使用
+  const app = getApp()
+  
+  app.globalData.openid
+  
+  //option 2：直接使用
+  getApp().globalData.openid
+  ```
+
+  
+
+- 循环1-7
+
+  ```js
+  wx:for="{{7}}"
+  ```
+
+- 复制代码
+
+  ```js
+  // 云函数入口函数
+  exports.main = (event, context) => {
+    console.log(event)
+    console.log(context)
+    return {
+      sum: event.a + event.b
+    }
+  }
+  ```
+
+  
+
+## common css
+
+- 第一个元素
+
+  ```css
+  .list-item:first-child {
+    border-top: none;
+  }
+  ```
+
+- 代码块效果: white-space: pre;
+
+  ```html
+  <text class="code">
+      {
+        "_id": "数据库自动生成记录 ID 字段",
+        "_openid": "数据库自动插入记录创建者的 openid",
+        "count": 1
+      }
+  </text>
+  ```
+
+  ```css
+  .code {
+    margin-top: 20rpx;
+    font-size: 24rpx;
+    line-height: 36rpx;
+    color: #666;
+    background: #fff;
+    white-space: pre;//关键
+  }
+  ```
+
+  
+
+
+
 ## promise
 
 promise是一个对象,可以保存状态(函数不可以,函数执行完会立即有结果返回),所以可以解决callback的问题.
@@ -457,13 +565,51 @@ onShareAppMessage: function() {
 
 ## API
 
-动态设置导航栏
+- 动态设置导航栏
 
 wx.showNavigationBarLoading()
 
 wx.hideNavigationBarLoading()
 
 wx.setNavigationBarTitle()
+
+- 导航
+
+```js
+//关闭所有页面，打开到应用内的某个页面
+wx.reLaunch({})
+
+//关闭当前页面，跳转到应用内的某个页面。但是不允许跳转到 tabbar 页面
+wx.redirectTo({})
+
+//保留当前页面，跳转到应用内的某个页面。但是不能跳到 tabbar 页面
+wx.navigateTo({})
+
+//关闭当前页面，返回上一页面或多级页面。可通过 getCurrentPages 获取当前的页面栈，决定需要返回几层
+wx.navigateBack()//返回上一页面
+
+wx.navigateBack({
+  delta: 2//返回的页面数，如 delta 大于现有页面数，则返回到首页
+})
+
+//综合实例
+goHome: function() {
+    const pages = getCurrentPages()    
+    if (pages.length === 2) {
+      wx.navigateBack()
+    } else if (pages.length === 1) {
+      wx.redirectTo({
+        url: '../index/index',
+      })
+    } else {
+      wx.reLaunch({
+        url: '../index/index',
+      })
+    }
+}
+```
+
+
 
 ## IconFont
 
@@ -1598,7 +1744,7 @@ rm -r directory
 
 ## git
 
-操作1:下载仓库项目并保持同步
+操作1: vs code环境
 
 1. 下载clone:把远程仓库的项目下载到本地.要记得自己项目仓库的地址哦
 2. 打开:用vs code打开项目,正常编辑文件.git图标栏会有相应的提示:changes 数字.表示有几个改变.
@@ -1608,15 +1754,29 @@ rm -r directory
 3. 缓存add:选择+号(stage all changes)或依次点击提示项目后面的+号.添加到staged(缓存起来)直到提示变为:changes 0.
 4. 提交commit:在上方的消息框中输入提交信息(-m).按上面的对号/或ctrl+enter,开始提交.
 5. 推送push:点击...下拉菜单,选择push,把项目推送到仓库.
+6. 注意：
 
-操作2:把现有项目推送到仓库
+操作2: 把现有项目推送到仓库
 
 1. 先在github上建立一个仓库用来保存你的项目,记好这个地址哦
-2. 在当前项目目录下,右键->git bash here,打开git控制台.vs code的cmd 窗口不可以哦.
+2. 在当前项目目录下,右键->git bash here,打开git控制台. vs code的cmd 窗口不可以哦.
 
 ```cmd
-$git init
+$git init//因为项目还没有添加到仓库过，所以要初始化以便仓库接收
 $git add *
+$git commit -m "some msg"
+$git remote add origin url//你仓库的url
+$git push -u origin master//提交到仓库
+```
+
+操作3：纯cmd方式(git bash here)
+
+```cmd
+$git clone 'url'
+//do something
+$git add .
+$git config  user.name ''//仅第一次推送需要指定
+$git config  user.email ''//仅第一次推送需要指定
 $git commit -m "some msg"
 $git remote add origin url//你仓库的url
 $git push -u origin master//提交到仓库
